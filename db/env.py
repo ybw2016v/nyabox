@@ -15,9 +15,9 @@ fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-# from myapp import mymodel
+from data.db import m_db
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = m_db()
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
