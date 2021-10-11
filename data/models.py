@@ -11,6 +11,7 @@ class Cdog(Base):
     stime = Column(DateTime, unique=False)
     uid = Column(String(16), unique=False)
     uuid = Column(String(256), unique=False)
+    tid = Column(String(16), unique=False)
     qid = Column(String(16), unique=False)
     hid = Column(String(16), unique=False)
     text = Column(Text, unique=False)
