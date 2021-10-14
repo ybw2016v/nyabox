@@ -9,9 +9,12 @@ from sqlalchemy.sql.expression import text
 
 from data.models import Cdog,Udog
 from data.db import db_session
+from tools.addq import addq
+from tools.adda import adda
 from tools.gid import gen_dog_id
 import uuid
 
+from tools.getuser import get_user_by_i,get_user_by_uid
 
 app = Flask(__name__)
 app.config.update(RESTFUL_JSON=dict(ensure_ascii=False))
@@ -29,25 +32,6 @@ parser.add_argument('y', type=int, help='页数')
 parser.add_argument('type', type=str, help='类型')
 
 
-def get_user_by_i(tokend):
-    """
-    从token得到用户信息
-    """
-    try:
-        udog=Udog.query.filter(Udog.token==tokend).first()
-    except:
-        return "ERROR"
-    return udog
-
-def get_user_by_uid(uidog):
-    """
-    从token得到用户信息
-    """
-    try:
-        udog=Udog.query.filter(Udog.uid==uidog).first()
-    except:
-        return "ERROR"
-    return udog
 
 class addog(Resource):
     def post(self):
@@ -57,27 +41,9 @@ class addog(Resource):
         args = parser.parse_args()
         ty=args['type']
         if ty=="q":
-            tid=args["t"]
-            context=args['c']
-            tuid = None
-            if args["i"] is not None:
-                tuid = get_user_by_i(args["i"])
-
-    
-            to_user=get_user_by_uid(tid)
-
-            if to_user is None:
-                return {"r":"bad","m":"没有这个用户"}
-            
-            uuidog=str(uuid.uuid4())
-            newcdog=Cdog(id=gen_dog_id(),type="Q",stime=datetime.now(),tid=to_user.uid,uuid=uuidog,text=context)
-            
-            db_session.add(newcdog)
-            db_session.commit()
-            # ToDo
-            # Send Email to User
-            # notify(tid)
-            return {"r":"ok","to":tid,"i":args['i'],"uuid":uuidog}
+            return addq(args)
+        if ty=="a":
+            return adda(args)
         context=args['c']
         token=args['i']
         user=get_user_by_i(token)

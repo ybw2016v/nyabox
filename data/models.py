@@ -27,3 +27,4 @@ class Udog(Base):
     stime = Column(DateTime, unique=False)
     uuid = Column(String(256), unique=False)
     text = Column(Text, unique=False)
+    ip = Column(Text, unique=False)
