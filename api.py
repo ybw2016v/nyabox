@@ -11,6 +11,7 @@ from data.models import Cdog,Udog
 from data.db import db_session
 from tools.addq import addq
 from tools.adda import adda
+from tools.listq import get_all_qa
 from tools.gid import gen_dog_id
 import uuid
 
@@ -28,7 +29,7 @@ parser.add_argument('t', type=str, help='提问目标')
 parser.add_argument('r', type=float, help='显示概率')
 parser.add_argument('i', type=str, help='访问token',required=False)
 parser.add_argument('g', type=int, help='是否生成图片')
-parser.add_argument('y', type=int, help='页数')
+parser.add_argument('y', type=int, help='分页页数')
 parser.add_argument('type', type=str, help='类型')
 
 
@@ -52,7 +53,14 @@ class addog(Resource):
             return {"r":403}
 
         return {"r":"ok","c":context}
-    pass
+
+class listdog(Resource):
+    def post(self):
+        """
+        查询相关
+        """
+        args = parser.parse_args()
+        return get_all_qa(args)
 
 @app.route("/")
 def hel():
@@ -63,6 +71,7 @@ def hel():
 
 # api.add_resource(tsdog, '/api/')
 api.add_resource(addog, '/api/create/')
+api.add_resource(listdog, '/api/list/')
 # api.add_resource(lsdog, '/api/list/')
 # api.add_resource(rmdog, '/api/remove/')
 # api.add_resource(logindog, '/api/login/')
