@@ -11,7 +11,7 @@ from data.models import Cdog,Udog
 from data.db import db_session
 from tools.addq import addq
 from tools.adda import adda
-from tools.listq import get_all_qa,get_user_qa
+from tools.listq import get_all_qa,get_user_qa,get_my_q
 from tools.gid import gen_dog_id
 import uuid
 
@@ -70,6 +70,17 @@ class ListUserQa(Resource):
         args = parser.parse_args()
         return get_user_qa(args)
 
+class ListMyQa(Resource):
+    def post(self):
+        """
+        列出用户的所有问题
+        """
+        args = parser.parse_args()
+        return get_my_q(args)
+
+# class 
+
+
 @app.route("/")
 def hel():
     """
@@ -81,6 +92,7 @@ def hel():
 api.add_resource(addog, '/api/create/')
 api.add_resource(listdog, '/api/list/')
 api.add_resource(ListUserQa, '/api/lsqa/')
+api.add_resource(ListMyQa, '/api/lmqa/')
 # api.add_resource(rmdog, '/api/remove/')
 # api.add_resource(logindog, '/api/login/')
 # api.add_resource(doginfos, '/api/user/')
