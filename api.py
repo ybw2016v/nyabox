@@ -14,6 +14,9 @@ from tools.adda import adda
 from tools.listq import get_all_qa,get_user_qa,get_my_q
 from tools.gid import gen_dog_id
 from tools.user import get_dog_i
+
+from auth.login import create_user
+
 import uuid
 
 from tools.getuser import get_user_by_i,get_user_by_uid
@@ -80,6 +83,15 @@ class Idog(Resource):
         args = parser.parse_args()
         return get_dog_i(args)
 
+class Logindog(Resource):
+    def post(self):
+        """
+        用户登录
+        """
+        args = parser.parse_args()
+        return create_user(args)
+
+
 # class 
 
 
@@ -98,6 +110,7 @@ api.add_resource(listdog, '/api/list/')
 api.add_resource(ListUserQa, '/api/lsqa/')
 api.add_resource(ListMyQa, '/api/lmqa/')
 api.add_resource(Idog, '/api/i/')
+api.add_resource(Logindog, '/api/login/')
 # api.add_resource(logindog, '/api/login/')
 # api.add_resource(doginfos, '/api/user/')
 # api.add_resource(updog, '/api/update/')

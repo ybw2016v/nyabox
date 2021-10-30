@@ -20,6 +20,7 @@ class Udog(Base):
     __tablename__ = 'users'
     uid = Column(String(16), primary_key=True)
     nid = Column(String(256), unique=False)
+    mid = Column(String(32), unique=False)
     name = Column(String(256), unique=False)
     avatar = Column(String(512), unique=False)
     # key = Column(String(256), unique=False)
