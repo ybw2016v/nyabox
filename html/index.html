@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Wxdog</title>
+    <title>Nyabox</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="微信公众号转rss">
+    <meta name="description" content="Nyabox">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
@@ -54,24 +54,7 @@
         <div class="container dog">
             <br>
             <br>
-            <p>目前的功能是将微信公众号转化为rss，最终的目标是一个以微信公众号为核心的新媒体(半)自动化同步平台。以减少相关运营人员工作量。</p>
-            <br>
-            <p>对微信公众号页面解析采用BeautifulSoup4，将微信公众号页面内联css与部分其他平台不兼容的标签去除之后存入sqlite数据库，使用sqlalchemy作为对象关系映射框架。网页端使用前后端分离的架构。使用flask框架作为web服务器，用模板生成rss，同时用flask_restful提供一套管理展示用的api。前端使用Bootstrap4作为前端组件库，并使用Vanilla手写单页应用。</p>
-            <br>
-            <p>
-                目前可以实现将微信公众号永久链接转换为普通的rss与符合新华号文档规范的rss，并有一个简单的网页端管理后台。
-                将来可能会有从微信API自动获取永久链接、（半）自动推送至其他平台的功能。
-            </p>
 
-            <div class="card">
-                <div class="card-body"><h5>RSS订阅地址</h5>
-                <strong>RSS:<a href="/rss.xml">https://wxdog.neko.red/rss.xml</a></strong>
-                <br>
-                <strong>RSS（新华号）: <a href="/xhrss.xml">https://wxdog.neko.red/xhrss.xml</a></strong>
-            </div>
-            
-            </div>
-            <br>
             <div class="sdkldog">
                 <img src="https://m.dogcraft.top/files/0280b521-ec0f-4f93-8c18-5835420b1c55" alt=>
                 <p> Made with
