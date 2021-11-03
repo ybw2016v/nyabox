@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from flask import Flask, abort, jsonify, redirect, request, url_for
+from flask import send_from_directory
 from flask.globals import session
 from flask_redis import FlaskRedis
 from flask_restful import Api, Resource, abort, reqparse
@@ -101,6 +102,13 @@ def hel():
     docstring
     """
     return {"server":"runing"}
+
+@app.route('/page/<path:subpath>')
+def pwa(subpath):
+    """
+    单页应用
+    """
+    return send_from_directory('static','index.html')
 
 
 
