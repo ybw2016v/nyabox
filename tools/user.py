@@ -7,5 +7,5 @@ def get_dog_i(args):
     udog=get_user_by_i(dog_token)
     if udog is None or udog=="ERROR":
         return {"r":4065}
-    res={"uid":udog.uid,"nid":udog.nid,"name":udog.name,"avatar":udog.avatar,"uuid":udog.uuid,"text":udog.text}
+    res={"uid":udog.uid,"nid":udog.nid,"name":udog.name,"avatar":udog.avatar,"text":udog.text,"mid":udog.mid}
     return {"r":"OK","c":res}

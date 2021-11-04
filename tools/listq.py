@@ -1,4 +1,4 @@
-from data.models import Cdog
+from data.models import Cdog,Udog
 from .getuser import get_user_by_i
 
 def get_all_qa(args):
@@ -9,9 +9,17 @@ def get_all_qa(args):
     qdog=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.hid!=None).filter(Cdog.type=="Q").limit(10).offset(page*10)
     qdogn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.hid!=None).filter(Cdog.type=="Q").count()
     resdog=[]
+    catch={}
     for qudog in qdog:
         dictd={"id":qudog.id,"hid":qudog.hid,"c":qudog.text,"tid":qudog.tid,"time":qudog.stime.astimezone().isoformat(timespec='milliseconds')}
         resdog.append(dictd)
+        if qudog.tid in catch:
+            dictd["user"]=catch[qudog.tid]
+        else:
+            udog=Udog.query.filter(Udog.uid==qudog.tid).first()
+            udogf={"uid":udog.uid,"nid":udog.nid,"name":udog.name,"avatar":udog.avatar,"text":udog.text,"mid":udog.mid}
+            catch[qudog.tid]=udogf
+            dictd["user"]=udogf
     return {"r":"OK","res":resdog,"num":qdogn}
 
 def get_user_qa(args):
