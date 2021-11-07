@@ -1,26 +1,26 @@
+import uuid
 from datetime import datetime, timedelta
 
-from flask import Flask, abort, jsonify, redirect, request, url_for
-from flask import send_from_directory
+from flask import (Flask, abort, jsonify, redirect, request,
+                   send_from_directory, url_for)
 from flask.globals import session
 from flask_redis import FlaskRedis
 from flask_restful import Api, Resource, abort, reqparse
 from sqlalchemy import or_
 from sqlalchemy.sql.expression import text
 
-from data.models import Cdog,Udog
-from data.db import db_session
-from tools.addq import addq
-from tools.adda import adda
-from tools.listq import get_all_qa,get_user_qa,get_my_q
-from tools.gid import gen_dog_id
-from tools.user import get_dog_i
-
 from auth.login import create_user
-
-import uuid
-
-from tools.getuser import get_user_by_i,get_user_by_uid
+from data.db import db_session
+from data.models import Cdog, Udog
+from tools.adda import adda
+from tools.addq import addq
+from tools.getc import get_c_by_id
+from tools.getq import get_q_by_id
+from tools.getques import get_ques_by_uid
+from tools.getuser import get_user_by_i, get_user_by_uid
+from tools.gid import gen_dog_id
+from tools.listq import get_all_qa, get_my_q, get_user_qa
+from tools.user import get_dog_i,get_dog_id
 
 app = Flask(__name__)
 app.config.update(RESTFUL_JSON=dict(ensure_ascii=False))
@@ -84,6 +84,14 @@ class Idog(Resource):
         args = parser.parse_args()
         return get_dog_i(args)
 
+class IDdog(Resource):
+    def post(self):
+        """
+        返回用户相关信息
+        """
+        args = parser.parse_args()
+        return get_dog_id(args)
+
 class Logindog(Resource):
     def post(self):
         """
@@ -91,6 +99,22 @@ class Logindog(Resource):
         """
         args = parser.parse_args()
         return create_user(args)
+
+class GetQuesById(Resource):
+    def post(self):
+        """
+        根据id获取问题
+        """
+        args = parser.parse_args()
+        return get_q_by_id(args)
+
+class GetCById(Resource):
+    def post(self):
+        """
+        根据id获取内容
+        """
+        args = parser.parse_args()
+        return get_c_by_id(args)
 
 
 # class 
@@ -119,6 +143,9 @@ api.add_resource(ListUserQa, '/api/lsqa/')
 api.add_resource(ListMyQa, '/api/lmqa/')
 api.add_resource(Idog, '/api/i/')
 api.add_resource(Logindog, '/api/login/')
+api.add_resource(GetQuesById, '/api/getq/')
+api.add_resource(GetCById, '/api/getc/')
+api.add_resource(IDdog, '/api/getd/')
 # api.add_resource(logindog, '/api/login/')
 # api.add_resource(doginfos, '/api/user/')
 # api.add_resource(updog, '/api/update/')

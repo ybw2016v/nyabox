@@ -10,10 +10,8 @@
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="/static/mainpage.js"></script>
-    <script src="/static/quespage.js"></script>
-    <script src="/static/main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="/static/main.js"></script> -->
 
 
 </head>
@@ -53,24 +51,64 @@
     </nav>
 
     <div id="main">
+        <div id ="dogcp">
+            <div class="card">
+                <div class="card-body" id="${item.id}">
+                    <div class="contain ">
+                        <h2 class="text-center sdkldog">404 NotFound</h2>
+                        <h4 class="sdkldog">找不到该内容</h4>
+                        <br>
+                        <div class="img"><img class="img"  src="https://a.neko.red/ep/404.png" alt=""></div>
+                        
+                    </div>
+                </div>
+            </div>
 
-    </div>
+            <div class="card">
+                <div class="card-body" id="${item.id}">
+                    <div class="contain ">
+                        <span class="qdogname">dogcraft</span><span>收到了问题:</span>
+                    </div>
+                    <hr>
+                    <div>
+                        你有多少狗？
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="uadog"> 
+                        <span class="badge badge-pill badge-info">${DogDateTime} </span></span>
+                </div>
+            </div>
 
-    <div id="footdoge" class="dog text-center">
-
+            <div class="card">
+                <div class="card-body" id="${item.id}">
+                    <img id="avatar-${item.id}" src="https://www.dogcraft.top/avatar.jpg" class="adogavatar"><span class="adogname">dogcraft</span>
+                    <span class="aposttime badge badge-pill badge-info">${DogDateTime} </span>
+    
+                    <div class="contain cont ques">
+                        回答:
+                        <hr>
+                        <div>
+                            666666
+                        </div>
+                    </div>
+    
+    
+                </div>
+            </div>
+            <br>
+    
+        </div>
     </div>
    
     <div class="jumbotron text-center " style="margin-bottom:0">
         <p>
         </p>
         <p>© 2021 Dogcraft</p>
-        <p><a href="http://www.beian.miit.gov.cn/">鲁ICP备19044668号-1</a></p>
     </div>
     <!-- <p></p> -->
-    <div id ="dogcp">
 
-    </div>
-    <!-- <script src="dog.js"></script> -->
+    <script src="dog.js"></script>
 
 </body>
 

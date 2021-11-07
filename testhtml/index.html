@@ -10,9 +10,7 @@
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="/static/mainpage.js"></script>
-    <script src="/static/quespage.js"></script>
+    <link rel="stylesheet" href="style.css">
     <script src="/static/main.js"></script>
 
 
@@ -55,10 +53,6 @@
     <div id="main">
 
     </div>
-
-    <div id="footdoge" class="dog text-center">
-
-    </div>
    
     <div class="jumbotron text-center " style="margin-bottom:0">
         <p>
@@ -68,9 +62,25 @@
     </div>
     <!-- <p></p> -->
     <div id ="dogcp">
+        <div class="card">
+            <div class="card-body" id="${item.id}">
+                <img id="avatar-${item.id}" src="${dogavatar}" class="dogavatar"><span class="dogname">${item.user.name}</span>
+                <span class="posttime badge badge-pill badge-info">${DogDateTime} </span>
+
+                <div class="contain cont ques">
+                    回答了<br>${item.c}
+                </div>
+
+
+            </div>
+            <div class="card-footer">
+                <span class="uadog"> 
+                ${eledog.ua}</span>
+            </div>
+        </div>
 
     </div>
-    <!-- <script src="dog.js"></script> -->
+    <script src="dog.js"></script>
 
 </body>
 
