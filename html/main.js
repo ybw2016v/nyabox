@@ -79,9 +79,64 @@ async function getUserInfo(uid) {
             return null;
         }
     }
-
 }
 
+function AddUserAns(uid,N=0) {
+    if (!window.doglist) {
+        window.doglist = {};
+    }
+    $.post("http://127.0.0.1:5000/api/getd/",{
+        t:uid
+    },function (data,status) {
+        if(data.r=="OK")
+        {
+            UserCardHtml = `            <div class="card">
+            <div class="card-body" id="${data.c.uid}">
+                <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname">dogcraft</span>
+                <span class="posttime badge badge-pill badge-info">${data.c.nid}@m.dogcraft.top</span>
 
+                <div class="contain cont ques" id="text-${data.c.uid}">
+                </div>
+
+
+            </div>
+            <div class="card-footer">
+                <span class="uquadog"> uid: 
+                ${data.c.uid}  &nbsp mid : ${data.c.mid}</span>
+            </div>
+
+        </div>`;
+        $("#main").prepend(UserCardHtml);
+        document.getElementById(`text-${data.c.uid}`).innerText=data.c.text;
+        }
+        else
+        {
+            UserCardHtml = `<div class="card">
+            <div class="card-body" id="notfound">
+                <div class="contain ">
+                    <h2 class="text-center sdkldog">404 NotFound</h2>
+                    <h4 class="sdkldog">找不到该内容</h4>
+                    <br>
+                    <div class="img text-center"><img  src="https://a.neko.red/ep/404.png" alt=""></div>
+                    
+                </div>
+            </div>
+        </div>`;
+        $("#main").prepend(UserCardHtml);
+    }
+    
+    }
+    )
+    $.post("http://127.0.0.1:5000/api/lsqa/",
+    {
+        t: uid,
+        y: N
+    },function (data,status) {
+        
+    }
+    );
+
+    
+}
 
 

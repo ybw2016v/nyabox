@@ -64,9 +64,18 @@ class ListUserQa(Resource):
     def post(self):
         """
         列出用户的所有问题
+        后续版本应当废弃
         """
         args = parser.parse_args()
-        return get_user_qa(args)
+        return get_user_qa(args,True)
+
+class ListUserAns(Resource):
+    def post(self):
+        """
+        列出用户的所有问题
+        """
+        args = parser.parse_args()
+        return get_user_qa(args,False)
 
 class ListMyQa(Resource):
     def post(self):
@@ -139,7 +148,7 @@ def pwa(subpath):
 # api.add_resource(tsdog, '/api/')
 api.add_resource(addog, '/api/create/')
 api.add_resource(listdog, '/api/list/')
-api.add_resource(ListUserQa, '/api/lsqa/')
+api.add_resource(ListUserAns, '/api/lsqa/')
 api.add_resource(ListMyQa, '/api/lmqa/')
 api.add_resource(Idog, '/api/i/')
 api.add_resource(Logindog, '/api/login/')

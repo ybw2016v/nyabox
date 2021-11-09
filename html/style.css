@@ -120,6 +120,11 @@ body {
     color: darkgrey;
 }
 
+.uquadog {
+    font-size: 0.99em;
+    color: darkgrey;
+}
+
 img {
     max-width: 95%;
     margin-right: auto;

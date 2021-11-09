@@ -22,14 +22,19 @@ def get_all_qa(args):
             dictd["user"]=udogf
     return {"r":"OK","res":resdog,"num":qdogn}
 
-def get_user_qa(args):
+def get_user_qa(args,isAll=False):
 
     page= 0 if args['y'] is None else args['y']
     uid=args["t"]
     if uid is None:
         return {"r":404}
-    qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).limit(10).offset(page*10)
-    qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.hid!=None).filter(Cdog.type=="Q").filter(Cdog.tid==uid).count()
+    if isAll:
+        qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).limit(10).offset(page*10)
+        qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).count()
+    else:
+        qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).filter(Cdog.hid!=None).limit(10).offset(page*10)
+        qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.hid!=None).filter(Cdog.type=="Q").filter(Cdog.tid==uid).count()
+    
     if qdogsn==0:
         return {"r":"用户不存在或者没有问题"}
     resdog=[]
