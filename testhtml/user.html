@@ -19,7 +19,7 @@
 <body>
 
     <style>
-        
+
     </style>
 
     <div class="jumbotron text-center" style="margin-bottom:0">
@@ -30,7 +30,7 @@
     </div>
 
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-        
+
         <a class="navbar-brand" href="javascript:void(0)">Wxdog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -51,36 +51,75 @@
     </nav>
 
     <div id="main">
-        <div id ="dogcp">
+        <div id="dogcp">
             <div class="card">
                 <div class="card-body" id="${item.id}">
                     <div class="contain ">
                         <h2 class="text-center sdkldog">404 NotFound</h2>
                         <h4 class="sdkldog">找不到该内容</h4>
                         <br>
-                        <div class="img"><img class="img"  src="https://a.neko.red/ep/404.png" alt=""></div>
-                        
+                        <div class="img"><img class="img" src="https://a.neko.red/ep/404.png" alt=""></div>
+
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-body" id="${item.id}">
-                    <img id="avatar-${item.id}" src="https://a.neko.red/mk/thumbnail-8c2d43c1-d145-4a53-8e84-f54ea05fb92a.jpg" class="dogavatar"><span class="dogname">dogcraft</span>
+                    <img id="avatar-${item.id}"
+                        src="https://a.neko.red/mk/thumbnail-8c2d43c1-d145-4a53-8e84-f54ea05fb92a.jpg"
+                        class="dogavatar"><span class="dogname">dogcraft</span>
                     <span class="posttime badge badge-pill badge-info">@dogcraft@m.dogcraft.top</span>
-    
+
                     <div class="contain cont ques">
                         ${text}
                     </div>
-    
-    
+                    <hr>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        我要提问
+                    </button>
+
+
                 </div>
                 <div class="card-footer">
-                    <span class="uadog"> uid: 
+                    <span class="uadog"> uid:
                         9iikafol</span>
                 </div>
 
             </div>
+
+            <!-- 模态框 -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- 模态框头部 -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">我要提问</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- 模态框主体 -->
+                        <div></div>
+                        <div class="modal-body">
+                            <div>
+                                <label for="comment">Q:</label>
+                                <textarea class="form-control" placeholder="???" name="" id="" rows="6"></textarea>
+                            </div>
+
+                        </div>
+
+                        <!-- 模态框底部 -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">提问</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
             <div class="card">
                 <div class="card-body" id="${item.id}">
                     <!-- <img id="avatar-${item.id}" src="https://a.neko.red/mk/thumbnail-8c2d43c1-d145-4a53-8e84-f54ea05fb92a.jpg" class="dogavatar"><span class="dogname">dogcraft</span>
@@ -91,27 +130,27 @@
                     </div>
                     <hr>
                     <h6>A:</h6>
-    
+
                     <div class="contain  ques">
                         ${text}
                     </div>
                 </div>
                 <div class="card-footer">
                     <span class="uadog"> Qtime:
-                        <br> 
+                        <br>
                         Anstime:</span>
                 </div>
 
             </div>
 
-            
 
-            
+
+
             <br>
-    
+
         </div>
     </div>
-   
+
     <div class="jumbotron text-center " style="margin-bottom:0">
         <p>
         </p>
