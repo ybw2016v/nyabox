@@ -1,10 +1,10 @@
-function addQues(data,doginfo) {
+function addQues(data, doginfo) {
     postTime = new Date(data.res.time);
-                    nowdog = new Date();
-                    postTime2 = DogTimeDif(nowdog - postTime);
-                    TimeStringDoge2 = postTime.toLocaleString();
-                    DogDateTime = postTime2 + TimeStringDoge2;
-                    let QuesCardHtml = `<div class="card">
+    nowdog = new Date();
+    postTime2 = DogTimeDif(nowdog - postTime);
+    TimeStringDoge2 = postTime.toLocaleString();
+    DogDateTime = postTime2 + TimeStringDoge2;
+    let QuesCardHtml = `<div class="card">
                     <div class="card-body" id="${data.res.id}">
                     <div class="contain ">
                     <span class="qdogname" id="${data.res.tid}">${doginfo.name}</span><span>收到了问题:</span>
@@ -17,18 +17,18 @@ function addQues(data,doginfo) {
                     <div class="card-footer">
                     <span class="badge badge-pill badge-info">${DogDateTime} </span>
                     </div></div>`;
-                    $("#main").append(QuesCardHtml);
-                    if (data.res.hid) {
-                        $.post("http://127.0.0.1:5000/api/getc/", { "t": data.res.hid }, function (data, status) {
-                            console.log(data);
-                            if (data.r == "OK" && data.res) {
-                                console.log(data.res);
-                                postTime = new Date(data.res.time);
-                                nowdog = new Date();
-                                postTime2 = DogTimeDif(nowdog - postTime);
-                                TimeStringDoge2 = postTime.toLocaleString();
-                                DogDateTime = postTime2 + TimeStringDoge2;
-                                AnsCardHtml = `            <div class="card">
+    $("#main").append(QuesCardHtml);
+    if (data.res.hid) {
+        $.post("http://127.0.0.1:5000/api/getc/", { "t": data.res.hid }, function (data, status) {
+            console.log(data);
+            if (data.r == "OK" && data.res) {
+                console.log(data.res);
+                postTime = new Date(data.res.time);
+                nowdog = new Date();
+                postTime2 = DogTimeDif(nowdog - postTime);
+                TimeStringDoge2 = postTime.toLocaleString();
+                DogDateTime = postTime2 + TimeStringDoge2;
+                AnsCardHtml = `            <div class="card">
                                 <div class="card-body" id="${doginfo.uid}">
                                     <img id="avatar-${doginfo.uid}" src="${doginfo.avatar}" class="adogavatar"><span class="adogname">${doginfo.name}</span>
                                     <span class="aposttime badge badge-pill badge-info">${DogDateTime} </span>
@@ -43,10 +43,10 @@ function addQues(data,doginfo) {
                                 </div>
                             </div>
                             <br>`;
-                                $("#main").append(AnsCardHtml);
-                            }
-                        })
-                    }
+                $("#main").append(AnsCardHtml);
+            }
+        })
+    }
 }
 
 
@@ -69,7 +69,7 @@ function ShowQues(qid) {
                     var Qinfo = data;
                     $.post("http://127.0.0.1:5000/api/getd/", {
                         t: data.res.tid
-                    },function (data,status) {
+                    }, function (data, status) {
                         if (data.r == "OK" && data.c) {
                             window.doglist[data.c.uid] = data.c;
                             doginfo = data.c;
@@ -104,10 +104,10 @@ function showQuesPage(qid) {
         ShowQues(qid);
     } else {
         Nowpath = window.location.pathname;
-    console.log(Nowpath);
-    shu = Nowpath.split("/");
-    qid = shu[3];
-    ShowQues(qid);
+        console.log(Nowpath);
+        shu = Nowpath.split("/");
+        qid = shu[3];
+        ShowQues(qid);
     }
-    
+
 }

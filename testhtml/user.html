@@ -75,7 +75,7 @@
                         ${text}
                     </div>
                     <hr>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Ques">
                         我要提问
                     </button>
 
@@ -89,7 +89,7 @@
             </div>
 
             <!-- 模态框 -->
-            <div class="modal fade" id="myModal">
+            <div class="modal fade" id="Ques">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
@@ -102,16 +102,17 @@
                         <!-- 模态框主体 -->
                         <div></div>
                         <div class="modal-body">
-                            <div>
+                            <div class="form-group">
                                 <label for="comment">Q:</label>
-                                <textarea class="form-control" placeholder="???" name="" id="" rows="6"></textarea>
+                                <textarea class="form-control" placeholder="???" name="" id="" rows="4"></textarea>
                             </div>
+                            <div id="info">Loading……</div>
 
                         </div>
 
                         <!-- 模态框底部 -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">提问</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="PostQuse(this);">提问</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                         </div>
 

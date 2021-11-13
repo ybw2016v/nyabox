@@ -11,7 +11,30 @@ function showUserPage(uid) {
     shu = Nowpath.split("/");
     uid = shu[3];
     }
+    window.uid = uid;
     AddUserAns(uid,window.UserAnsNum);
+}
+
+function PostQuse(dogs) {
+    console.log(dogs);
+    const Ques=document.getElementById("QQues").value;
+
+    $.post("http://127.0.0.1:5000/api/create/",{
+        "type":"q",
+        "c":Ques,
+        "t":window.uid
+    },function (data,status) {
+        if (data.r=="ok") {
+            alert("提问成功，请耐心等待回答。");
+            $("#Ques").click();
+        } else {
+            alert("提问失败，该服务暂不可用。");
+            $("#Ques").click();
+        }
+    });
+    $("#Loading").text("Loading……");
+
+    
 }
 
 
@@ -35,18 +58,53 @@ function AddUserAns(uid, N = 0) {
             if (data.r == "OK") {
                 UserCardHtml = `<div class="card">
                 <div class="card-body" id="${data.c.uid}">
-                    <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname">dogcraft</span>
+                    <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname">${data.c.name}</span>
                     <span class="posttime badge badge-pill badge-info">${data.c.nid}@m.dogcraft.top</span>
     
                     <div class="contain cont ques" id="text-${data.c.uid}">
                     </div>
+                    <hr>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Ques">
+                        我要提问
+                    </button>
                 </div>
                 <div class="card-footer">
                     <span class="uquadog"> uid: 
                     ${data.c.uid}  &nbsp mid : ${data.c.mid}</span>
                 </div>
     
-            </div>`;
+            </div>
+            <div class="modal fade" id="Ques">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- 模态框头部 -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">我要提问</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- 模态框主体 -->
+                    <div></div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="comment">Q:</label>
+                            <textarea class="form-control" placeholder="???" name="" id="QQues" rows="4"></textarea>
+                        </div>
+
+                    </div>
+                    <div id="Loading"></div>
+
+                    <!-- 模态框底部 -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="PostQuse(this);">提问</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+            `;
                 $("#main").prepend(UserCardHtml);
                 document.getElementById(`text-${data.c.uid}`).innerText = data.c.text;
             }
