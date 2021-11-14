@@ -19,7 +19,7 @@
 <body>
 
     <style>
-        
+
     </style>
 
     <div class="jumbotron text-center" style="margin-bottom:0">
@@ -30,7 +30,7 @@
     </div>
 
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-        
+
         <a class="navbar-brand" href="javascript:void(0)">Wxdog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -53,10 +53,10 @@
     <div id="main">
 
     </div>
-   
+
 
     <!-- <p></p> -->
-    <div id ="dogcp">
+    <div id="dogcp">
         <div class="card">
             <div class="card-body" id="${item.id}">
                 <img id="avatar-${item.id}"
@@ -68,8 +68,11 @@
                     ${text}
                 </div>
                 <hr>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Ques">
+                <button type="button" class="btn btn-primary" data-target="#Ques">
                     退出登录
+                </button>
+                <button type="button" class="btn btn-primary" data-target="#Ques">
+                    设置
                 </button>
 
 
@@ -80,9 +83,27 @@
             </div>
 
         </div>
+        <div class="container mqus">
+            <h5>我的问题</h5>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a id="ql1" class="nav-link active" href="#">未回答问题</a>
+                </li>
+                <li class="nav-item">
+                    <a id="ql2" class="nav-link" href="#">全部回答问题</a>
+                </li>
+                <li class="nav-item">
+                    <a id="ql3" class="nav-link" href="#">已回答回答问题</a>
+                </li>
+            </ul>
+        </div>
 
     </div>
     <script src="dog.js"></script>
+    <script>
+
+
+    </script>
 
 </body>
 

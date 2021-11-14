@@ -1,6 +1,6 @@
 function showUserPage(uid) {
     $("#main").html("");
-    $("footdoge").html("");
+    $("#footdoge").html("");
     window.UserAnsNum=0;
     if (uid) {
         console.log(uid);
@@ -163,7 +163,7 @@ function AddUserAns(uid, N = 0) {
                             回答时间:${adtime}</span>
                     </div>
     
-                </div>`
+                </div>`;
                         $("#main").append(UserAnsHtml);
                     }
                         MoredogHtml = `<button class="moredog" onclick="MoreUserAns(this)" id="ansdog" uid="${uid}">MORE 查看更多</button>`;
