@@ -43,7 +43,7 @@ function AddHomeUserInfo(token) {
                     <hr>
                         <div class="form-group">
                             <label for="comment">A:</label>
-                            <textarea class="form-control" placeholder="有什么想说的？" name="" id="QQues" rows="4"></textarea>
+                            <textarea class="form-control" placeholder="有什么想说的？" name="" id="AAns" rows="4"></textarea>
                         </div>
 
                     </div>
@@ -319,6 +319,27 @@ function AnsQues(dog) {
     $("#Anse").modal("show");
 }
 function PostAns() {
-    console.log(this);
-    
+    // console.log(this);
+    const qid=this.getAttribute("qid");
+    const ans=document.getElementById("AAns").value;
+    $.post("http://127.0.0.1:5000/api/create/",{
+        "type":"a",
+        "i":window.token,
+        "c":ans,
+        "t":qid
+    },function (data,status) {
+        if (data.r=="OK") {
+            // alert("提问成功，请耐心等待回答。");
+            const SHtml=`<div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>回答成功!回答ID： ${data.qid}</strong> 
+          </div>`;
+            $("#main").prepend(SHtml);
+            $("#Ques").click();
+        } else {
+            alert("提问失败，该服务暂不可用。");
+            $("#Ques").click();
+        }
+    });
+    $("#Loading").text("Loading……");
 }

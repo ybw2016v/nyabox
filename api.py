@@ -50,7 +50,7 @@ class addog(Resource):
             return addq(args)
         if ty=="a":
             return adda(args)
-        return {"r":"ok","c":context}
+        return {"r":"ok","c":"???"}
 
 class listdog(Resource):
     def post(self):
