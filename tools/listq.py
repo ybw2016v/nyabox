@@ -50,32 +50,35 @@ def get_user_qa(args,isAll=False):
 
 def get_my_q(args):
     """
-    docstring
+    获取我的问题列表
     """
 
     page= 0 if args['y'] is None else args['y']
+    dogtype=args["type"]
 
     token=args["i"]
     udog = get_user_by_i(token)
     if udog=="ERROR":
         return {"r":403}
-    qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==udog.uid).limit(10).offset(page*10)
-    qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==udog.uid).count()
-    if qdogsn==0:
-        return {"r":"用户不存在或者没有问题"}
+    if dogtype=="a":
+        qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.hid!=None).filter(Cdog.tid==udog.uid).limit(10).offset(page*10)
+        qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.hid!=None).filter(Cdog.tid==udog.uid).count()
+    elif dogtype=="b":
+        qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.hid==None).filter(Cdog.tid==udog.uid).limit(10).offset(page*10)
+        qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.hid==None).filter(Cdog.tid==udog.uid).count()
+    else:
+        qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==udog.uid).limit(10).offset(page*10)
+        qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==udog.uid).count()
+    # if qdogsn==0:
+    #     return {"r":"用户不存在或者没有问题"}
     resdog=[]
     for qdog in qdogs:
         qdoga=None
-        if qdog.hid is not None:
+        if (qdog.hid is not None) and (dogtype!="b"):
             
             adog=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.id==qdog.hid).first()
             qdoga={"id":adog.id,"time":adog.stime.astimezone().isoformat(timespec='milliseconds'),"c":adog.text}
         dictd={"id":qdog.id,"hid":qdog.hid,"c":qdog.text,"tid":qdog.tid,"time":qdog.stime.astimezone().isoformat(timespec='milliseconds'),"ans":qdoga}
         resdog.append(dictd)
     return {"r":"OK","res":resdog,"num":qdogsn}
-
-
-    pass
-
-
 

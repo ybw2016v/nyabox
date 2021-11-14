@@ -26,6 +26,11 @@ function PostQuse(dogs) {
     },function (data,status) {
         if (data.r=="ok") {
             alert("提问成功，请耐心等待回答。");
+            const SHtml=`<div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>提问成功!问题ID： ${data.qid}</strong> 
+          </div>`;
+            $("#main").prepend(SHtml);
             $("#Ques").click();
         } else {
             alert("提问失败，该服务暂不可用。");

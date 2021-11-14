@@ -19,10 +19,11 @@ def addq(args):
     if to_user is None:
         return {"r":"bad","m":"没有这个用户"}
     uuidog=str(uuid.uuid4())
-    newcdog=Cdog(id=gen_dog_id(),type="Q",stime=datetime.now(),tid=to_user.uid,uuid=uuidog,text=context,uid=tuid)
+    dogid=gen_dog_id()
+    newcdog=Cdog(id=dogid,type="Q",stime=datetime.now(),tid=to_user.uid,uuid=uuidog,text=context,uid=tuid)
     
     db_session.add(newcdog)
     db_session.commit()
-    return {"r":"ok","to":tid,"i":args['i'],"uuid":uuidog}
+    return {"r":"ok","to":tid,"i":args['i'],"uuid":uuidog,"qid":dogid}
 
     
