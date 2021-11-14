@@ -26,6 +26,40 @@ function AddHomeUserInfo(token) {
             </div>
 
         </div>
+
+        <div class="modal fade" id="Anse">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- 模态框头部 -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">我要回答</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- 模态框主体 -->
+                    <div class="modal-body">
+                    <label for="comment">Q:</label>
+                    <div id="quesdog">
+                    </div>
+                    <hr>
+                        <div class="form-group">
+                            <label for="comment">A:</label>
+                            <textarea class="form-control" placeholder="有什么想说的？" name="" id="QQues" rows="4"></textarea>
+                        </div>
+
+                    </div>
+                    <div id="Loading"></div>
+
+                    <!-- 模态框底部 -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="ansb" >回答</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
         <div id="hdlt"><div class="container mqus">
         <h5>我的问题</h5>
         <ul class="nav nav-tabs">
@@ -36,7 +70,7 @@ function AddHomeUserInfo(token) {
                 <a id="ql2" class="nav-link" href="javascript:void(0)">全部回答问题</a>
             </li>
             <li class="nav-item">
-                <a id="ql3" class="nav-link" href="javascript:void(0)">已回答回答问题</a>
+                <a id="ql3" class="nav-link" href="javascript:void(0)">已回答问题</a>
             </li>
         </ul>
     </div>
@@ -48,6 +82,7 @@ function AddHomeUserInfo(token) {
             window.token = token;
             window.homepage = 0;
             window.qltype = "ql1";
+            document.getElementById("ansb").addEventListener("click", PostAns);
             const Dql1 = document.getElementById("ql1");
             Dql1.addEventListener("click", function () { AddUserQ1(); });
             const Dql2 = document.getElementById("ql2");
@@ -65,6 +100,7 @@ function AddHomeUserInfo(token) {
 
 function AddUserQ1(N = 0) {
     //未回答问题
+    window.qltype = "ql1";
     const Dql1 = document.getElementById("ql1");
     Dql1.className = "nav-link active";
     const Dql2 = document.getElementById("ql2");
@@ -78,7 +114,9 @@ function AddUserQ1(N = 0) {
     }, function (data, status) {
         if (data.r == "OK") {
             // console.log(data.c);
+            window.homepage = N;
             AddQl(data);
+            
         }
     }
     );
@@ -87,6 +125,7 @@ function AddUserQ1(N = 0) {
 
 function AddUserQ2(N = 0) {
     //全部回答问题
+    window.qltype = "ql2";
     const Dql1 = document.getElementById("ql1");
     Dql1.className = "nav-link";
     const Dql2 = document.getElementById("ql2");
@@ -100,6 +139,8 @@ function AddUserQ2(N = 0) {
     }, function (data, status) {
         if (data.r == "OK") {
             // console.log(data.c);
+            
+            window.homepage = N;
             AddQl(data);
         }
     }
@@ -108,6 +149,7 @@ function AddUserQ2(N = 0) {
 
 function AddUserQ3(N = 0) {
     //已回答回答问题
+    window.qltype = "ql3";
     const Dql1 = document.getElementById("ql1");
     Dql1.className = "nav-link";
     const Dql2 = document.getElementById("ql2");
@@ -121,6 +163,7 @@ function AddUserQ3(N = 0) {
     }, function (data, status) {
         if (data.r == "OK") {
             // console.log(data.c);
+            window.homepage = N;
             AddQl(data);
         }
     }
@@ -153,12 +196,11 @@ function AddQl(data) {
                         DogHomeListHtnl = `<div class="card">
                     <div class="card-body" id="${item.id}">
                         <h6>Q:</h6>
-                        <div class="contain  ques">
+                        <div class="contain  ques" id="QT${item.id}">
                             ${item.c}
                         </div>
                         <hr>
                         <h6>A:</h6>
-        
                         <div class="contain  ques" id="${item.ans.id}">
                             ${item.ans.c}
                         </div>
@@ -185,7 +227,7 @@ function AddQl(data) {
                         DogHomeListHtnl = `<div class="card">
                     <div class="card-body" id="${item.id}">
                         <h6>Q:</h6>
-                        <div class="contain  ques">
+                        <div class="contain  ques" id="QT${item.id}">
                             ${item.c}
                         </div>
                         <hr>
@@ -209,5 +251,74 @@ function AddQl(data) {
                     $("#homedogqlist").append(DogHomeListHtnl);
                 }
             }
+            FenYe(data.num);
+}
 
+function FenYe(num) {
+    const MaxPage=Math.ceil(num/10);
+    YeInfo=document.createElement("div");
+    YeInfo.innerText=`共${MaxPage}页 第${window.homepage+1}页`;
+    YeHtml=document.createElement("ul");
+    YeHtml.className="pagination justify-content-center";
+    QianYiYe=document.createElement("li");
+    QianYiYe.className="page-item";
+    QianYiYe.innerHTML=`<a class="page-link" href="javascript:void(0);">前一页</a>`;
+    HouYiYe=document.createElement("li");
+    HouYiYe.className="page-item";
+    HouYiYe.innerHTML=`<a class="page-link" href="javascript:void(0);">后一页</a>`;
+    if (window.homepage==0) {
+        QianYiYe.className="page-item disabled";
+    }
+    if (window.homepage==MaxPage-1) {
+        HouYiYe.className="page-item disabled";
+    }
+    QianYiYe.addEventListener("click",function(){Qian();});
+    HouYiYe.addEventListener("click",function(){Hou();});
+    YeHtml.appendChild(QianYiYe);
+    YeHtml.appendChild(HouYiYe);
+    $("#footdoge").html(YeInfo);
+    $("#footdoge").append(YeHtml);
+}
+function Qian() {
+    switch (window.qltype) {
+        case "ql1":
+            AddUserQ1(window.homepage-1);
+            break;
+        case "ql2":
+            AddUserQ2(window.homepage-1);
+            break;
+        case "ql3":
+            AddUserQ3(window.homepage-1);
+            break;
+        default:
+            AddUserQ1(window.homepage-1);
+            break;
+    }
+}
+function Hou() {
+    switch (window.qltype) {
+        case "ql1":
+            AddUserQ1(window.homepage+1);
+            break;
+        case "ql2":
+            AddUserQ2(window.homepage+1);
+            break;
+        case "ql3":
+            AddUserQ3(window.homepage+1);
+            break;
+        default:
+            AddUserQ1(window.homepage+1);
+            break;
+    }
+}
+
+function AnsQues(dog) {
+    const qid=dog.getAttribute("qid");
+    document.getElementById("ansb").setAttribute("qid",qid);
+    document.getElementById("quesdog").innerText=document.getElementById(`QT${qid}`).innerText;
+    $("#Anse").modal("show");
+}
+function PostAns() {
+    console.log(this);
+    
 }
