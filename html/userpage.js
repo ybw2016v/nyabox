@@ -37,7 +37,7 @@ function PostQuse(dogs) {
             $("#Ques").click();
         }
     });
-    $("#Loading").text("Loading……");
+    // $("#Loading").text("Loading……");
 
     
 }

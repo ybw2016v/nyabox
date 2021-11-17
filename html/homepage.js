@@ -280,6 +280,10 @@ function FenYe(num) {
     $("#footdoge").append(YeHtml);
 }
 function Qian() {
+    if (window.homepage==0) {
+        // QianYiYe.className="page-item disabled";
+        return "dog";
+    }
     switch (window.qltype) {
         case "ql1":
             AddUserQ1(window.homepage-1);
@@ -296,6 +300,10 @@ function Qian() {
     }
 }
 function Hou() {
+    if (window.homepage==MaxPage-1) {
+        // HouYiYe.className="page-item disabled";
+        return "dog";
+    }
     switch (window.qltype) {
         case "ql1":
             AddUserQ1(window.homepage+1);
@@ -316,6 +324,7 @@ function AnsQues(dog) {
     const qid=dog.getAttribute("qid");
     document.getElementById("ansb").setAttribute("qid",qid);
     document.getElementById("quesdog").innerText=document.getElementById(`QT${qid}`).innerText;
+    $("#Loading").text("");
     $("#Anse").modal("show");
 }
 function PostAns() {
@@ -342,4 +351,14 @@ function PostAns() {
         }
     });
     $("#Loading").text("Loading……");
+}
+
+function showHomePage() {
+    token=localStorage.getItem("i");
+    if (token) {
+        AddHomeUserInfo(token);
+    } else {
+        alart("请先登录");
+        window.location.href="login.html";
+    }
 }
