@@ -92,3 +92,60 @@ async function getUserInfo(uid) {
 
 
 
+function checkurl(e) {
+    e.preventDefault();
+    console.log(e.target.href);
+    dogroute(e.target.href);
+}
+
+
+function dogroute(doge) {
+    dogurl = new URL(doge);
+    if (dogurl.origin == location.origin) {
+        const dogpath = dogurl.pathname;
+        const shu = dogpath.split("/");
+        switch (shu[2]) {
+            case "u":
+            case "user":
+                showUserPage();
+                break;
+            case "home":
+                showHomePage();
+                break;
+            case "login":
+                showLoginPage();
+                break;
+            case "about":
+                showAboutPage();
+                break;
+            case "cb":
+                showCbPage();
+                break;
+            case "q":
+            case "ques":
+                showQuesPage();
+                break;
+            default:
+                showMainPage();
+                break;
+        }
+    }
+    else {
+        location.href = doge;
+    }
+}
+
+
+function doglink() {
+    const allLink = document.querySelectorAll('a');
+    for (let i = 0, len = allLink.length; i < len; i++) {
+        const ldog = allLink[i];
+        if (ldog.hasAttribute('dogroute')) {
+            // ldog.addEventListener('click', checkurl);
+        } else {
+            ldog.setAttribute('dogroute', true);
+            ldog.addEventListener('click', checkurl, false);
+        }
+    }
+}
+
