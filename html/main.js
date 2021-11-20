@@ -5,35 +5,17 @@ Nowpath = window.location.pathname;
 console.log(Nowpath);
 shu = Nowpath.split("/");
 
+window.addEventListener('popstate', function (e) {
+    dogroute(location.href, false);
+});
+
+
 
 window.onload = function () {
-    console.log(shu[2]);
-    switch (shu[2]) {
-        case "u":
-        case "user":
-            showUserPage();
-            break;
-        case "home":
-            showHomePage();
-            break;
-        case "login":
-            showLoginPage();
-            break;
-        case "about":
-            showAboutPage();
-            break;
-        case "cb":
-            showCbPage();
-            break;
-        case "q":
-        case "ques":
-            showQuesPage();
-            break;
-        default:
-            showMainPage();
-            break;
-    }
+    adddoglink();
+    dogroute(location.href, false);
 }
+
 
 
 
@@ -99,11 +81,14 @@ function checkurl(e) {
 }
 
 
-function dogroute(doge) {
+function dogroute(doge, ldog = true) {
     dogurl = new URL(doge);
     if (dogurl.origin == location.origin) {
         const dogpath = dogurl.pathname;
         const shu = dogpath.split("/");
+        if (ldog) {
+            history.pushState({ "page": dogpath }, shu[2], doge);
+        }
         switch (shu[2]) {
             case "u":
             case "user":
@@ -136,8 +121,15 @@ function dogroute(doge) {
 }
 
 
-function doglink() {
-    const allLink = document.querySelectorAll('a');
+function doglink(dohu) {
+    console.log(dohu);
+
+    if (dohu != null) {
+        var allLink = dohu.querySelectorAll('a');
+    } else {
+        console.log("dog");
+        var allLink = document.querySelectorAll('a');
+    }
     for (let i = 0, len = allLink.length; i < len; i++) {
         const ldog = allLink[i];
         if (ldog.hasAttribute('dogroute')) {
@@ -149,3 +141,22 @@ function doglink() {
     }
 }
 
+function adddoglink() {
+    doglink();
+    const ddogpage = document.body;
+    const config = { attributes: false, childList: true, subtree: true };
+    const observer = new MutationObserver(callback);
+    observer.observe(ddogpage, config);
+}
+
+var callback = function (mutationsList) {
+    mutationsList.forEach(function (item, index) {
+        if (item.type == 'childList') {
+            item.addedNodes.forEach(function (item, index) {
+                if (item.querySelectorAll) {
+                    doglink(item);
+                }
+            });
+        }
+    });
+}

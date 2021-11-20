@@ -6,6 +6,8 @@ function MoreDogItem() {
 function showMainPage() {
     // Qurl="http://127.0.0.1:5000/api/list/";
     console.log("showMainPage");
+    $("#footdoge").html("");
+    $("#main").html("");
     window.dogNum = 0;
     addPage(window.dogNum);
 }
