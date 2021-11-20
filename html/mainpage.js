@@ -13,7 +13,7 @@ function showMainPage() {
 }
 
 function addPage(N = 0) {
-    ck = $.post("http://127.0.0.1:5000/api/list/",
+    ck = $.post(APIURL+"/api/list/",
         {
             y: N
         },

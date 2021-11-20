@@ -126,7 +126,6 @@ class GetCById(Resource):
         return get_c_by_id(args)
 
 
-# class 
 
 
 @app.route("/")

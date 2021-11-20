@@ -1,6 +1,6 @@
 function AddHomeUserInfo(token) {
     $("#footdoge").html("");
-    $.post("http://127.0.0.1:5000/api/i/", {
+    $.post(APIURL+"/api/i/", {
         "i": token
     }, function (data, status) {
         if (data.r == "OK") {
@@ -67,7 +67,7 @@ function AddHomeUserInfo(token) {
                 <a id="ql1" class="nav-link active" href="javascript:void(0)">未回答问题</a>
             </li>
             <li class="nav-item">
-                <a id="ql2" class="nav-link" href="javascript:void(0)">全部回答问题</a>
+                <a id="ql2" class="nav-link" href="javascript:void(0)">全部问题</a>
             </li>
             <li class="nav-item">
                 <a id="ql3" class="nav-link" href="javascript:void(0)">已回答问题</a>
@@ -107,7 +107,7 @@ function AddUserQ1(N = 0) {
     Dql2.className = "nav-link";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link";
-    $.post("http://127.0.0.1:5000/api/lmqa/", {
+    $.post(APIURL+"/api/lmqa/", {
         "i": window.token,
         "type": "b",
         "y": N
@@ -132,7 +132,7 @@ function AddUserQ2(N = 0) {
     Dql2.className = "nav-link active";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link";
-    $.post("http://127.0.0.1:5000/api/lmqa/", {
+    $.post(APIURL+"/api/lmqa/", {
         "i": window.token,
         "type": "0",
         "y": N
@@ -156,7 +156,7 @@ function AddUserQ3(N = 0) {
     Dql2.className = "nav-link";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link active";
-    $.post("http://127.0.0.1:5000/api/lmqa/", {
+    $.post(APIURL+"/api/lmqa/", {
         "i": window.token,
         "type": "a",
         "y": N
@@ -256,6 +256,7 @@ function AddQl(data) {
 
 function FenYe(num) {
     const MaxPage=Math.ceil(num/10);
+    window.MaxPage=MaxPage;
     YeInfo=document.createElement("div");
     YeInfo.innerText=`共${MaxPage}页 第${window.homepage+1}页`;
     YeHtml=document.createElement("ul");
@@ -269,7 +270,7 @@ function FenYe(num) {
     if (window.homepage==0) {
         QianYiYe.className="page-item disabled";
     }
-    if (window.homepage==MaxPage-1) {
+    if (window.homepage==window.MaxPage-1) {
         HouYiYe.className="page-item disabled";
     }
     QianYiYe.addEventListener("click",function(){Qian();});
@@ -300,7 +301,7 @@ function Qian() {
     }
 }
 function Hou() {
-    if (window.homepage==MaxPage-1) {
+    if (window.homepage==window.MaxPage-1) {
         // HouYiYe.className="page-item disabled";
         return "dog";
     }
@@ -328,10 +329,11 @@ function AnsQues(dog) {
     $("#Anse").modal("show");
 }
 function PostAns() {
+    console.log("POS");
     // console.log(this);
     const qid=this.getAttribute("qid");
     const ans=document.getElementById("AAns").value;
-    $.post("http://127.0.0.1:5000/api/create/",{
+    $.post(APIURL+"/api/create/",{
         "type":"a",
         "i":window.token,
         "c":ans,
@@ -341,13 +343,13 @@ function PostAns() {
             // alert("提问成功，请耐心等待回答。");
             const SHtml=`<div class="alert alert-success alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>回答成功!回答ID： ${data.qid}</strong> 
+            <strong>回答成功!回答ID： ${data.id}</strong> 
           </div>`;
             $("#main").prepend(SHtml);
-            $("#Ques").click();
+            $("#Anse").click();
         } else {
-            alert("提问失败，该服务暂不可用。");
-            $("#Ques").click();
+            alert("回答失败，该服务暂不可用。");
+            $("#Anse").click();
         }
     });
     $("#Loading").text("Loading……");
@@ -358,7 +360,7 @@ function showHomePage() {
     if (token) {
         AddHomeUserInfo(token);
     } else {
-        alart("请先登录");
-        window.location.href="login.html";
+        alert("请先登录");
+        window.location.href="/static/auth.html";
     }
 }

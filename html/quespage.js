@@ -19,10 +19,10 @@ function addQues(data, doginfo) {
                     </div></div>`;
     $("#main").append(QuesCardHtml);
     if (data.res.hid) {
-        $.post("http://127.0.0.1:5000/api/getc/", { "t": data.res.hid }, function (data, status) {
-            console.log(data);
+        $.post(APIURL+"/api/getc/", { "t": data.res.hid }, function (data, status) {
+            // console.log(data);
             if (data.r == "OK" && data.res) {
-                console.log(data.res);
+                // console.log(data.res);
                 postTime = new Date(data.res.time);
                 nowdog = new Date();
                 postTime2 = DogTimeDif(nowdog - postTime);
@@ -57,7 +57,7 @@ function ShowQues(qid) {
     if (!window.doglist) {
         window.doglist = {};
     }
-    $.post("http://127.0.0.1:5000/api/getq/", { "t": qid },
+    $.post(`${APIURL}/api/getq/`, { "t": qid },
         function (data, status) {
             if (data.r == "OK" && data.res) {
                 var adogid = data.res.tid;
@@ -67,7 +67,7 @@ function ShowQues(qid) {
                     addQues(data, doginfo);
                 } else {
                     var Qinfo = data;
-                    $.post("http://127.0.0.1:5000/api/getd/", {
+                    $.post(APIURL+"/api/getd/", {
                         t: data.res.tid
                     }, function (data, status) {
                         if (data.r == "OK" && data.c) {

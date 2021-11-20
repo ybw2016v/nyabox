@@ -33,7 +33,6 @@ function dogin() {
     cburl=encodeURIComponent("http://127.0.0.1:5000/static/cb.html")
     desp=encodeURIComponent("一个提问箱")
     AuthUrl=`https://m.dogcraft.top/meow/?response_type=token&icon=${iconurl}&redirect_uri=${cburl}&name=Nyabox&desp=${desp}`
-    // console.log(AuthUrl);
     window.location.href=AuthUrl;
 }
 

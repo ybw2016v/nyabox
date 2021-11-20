@@ -76,7 +76,7 @@ async function getUserInfo(uid) {
 
 function checkurl(e) {
     e.preventDefault();
-    console.log(e.target.href);
+    // console.log(e.target.href);
     dogroute(e.target.href);
 }
 
