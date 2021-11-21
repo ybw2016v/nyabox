@@ -29,11 +29,24 @@ def get_user_qa(args,isAll=False):
     if uid is None:
         return {"r":404}
     if isAll:
-        qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).limit(10).offset(page*10)
-        qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).count()
+        if uid[0]=="@":
+            udog=Udog.query.filter(Udog.nid==uid[1:]).first()
+            nuid=udog.uid
+            qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==nuid).limit(10).offset(page*10)
+            qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==nuid).count()
+        else:
+            qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).limit(10).offset(page*10)
+            qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).count()
     else:
-        qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).filter(Cdog.hid!=None).limit(10).offset(page*10)
-        qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.hid!=None).filter(Cdog.type=="Q").filter(Cdog.tid==uid).count()
+        if uid[0]=="@":
+            udog=Udog.query.filter(Udog.nid==uid[1:]).first()
+            nuid=udog.uid
+            qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==nuid).filter(Cdog.hid!=None).limit(10).offset(page*10)
+            qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.hid!=None).filter(Cdog.type=="Q").filter(Cdog.tid==nuid).count()
+
+        else:
+            qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="Q").filter(Cdog.tid==uid).filter(Cdog.hid!=None).limit(10).offset(page*10)
+            qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.hid!=None).filter(Cdog.type=="Q").filter(Cdog.tid==uid).count()
     
     if qdogsn==0:
         return {"r":"用户不存在或者没有问题"}

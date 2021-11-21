@@ -36,6 +36,10 @@ function dogin() {
     window.location.href=AuthUrl;
 }
 
+function gohome() {
+  location.href = "/page/home/";
+}
+
 window.onload=function () {
     GetUserToken()
 }

@@ -7,7 +7,7 @@ function addQues(data, doginfo) {
     let QuesCardHtml = `<div class="card">
                     <div class="card-body" id="${data.res.id}">
                     <div class="contain ">
-                    <span class="qdogname" id="${data.res.tid}">${doginfo.name}</span><span>收到了问题:</span>
+                    <span class="qdogname" id="${data.res.tid}"><a href="/page/u/${data.res.tid}"">${doginfo.name}</a></span><span>收到了问题:</span>
                     </div>
                     <hr>
                     <div>

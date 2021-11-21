@@ -82,6 +82,7 @@ function checkurl(e) {
 
 
 function dogroute(doge, ldog = true) {
+    console.log(doge);
     dogurl = new URL(doge);
     if (dogurl.origin == location.origin) {
         const dogpath = dogurl.pathname;

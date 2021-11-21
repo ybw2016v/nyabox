@@ -33,7 +33,7 @@ function addPage(N = 0) {
                         DogDateTime = postTime2 + TimeStringDoge2;
                         CardHtml = `<div class="card">
                         <div class="card-body" id="${item.id}">
-                            <img id="avatar-${item.id}" src="${dogavatar}" class="dogavatar"><span class="dogname">${item.user.name}</span>
+                            <img id="avatar-${item.id}" src="${dogavatar}" class="dogavatar"><span class="dogname"><a href="/page/u/${item.user.uid}">${item.user.name}</a></span>
                             <span class="posttime badge badge-pill badge-info">${DogDateTime} </span>
             
                             <div class="contain cont ">
