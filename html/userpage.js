@@ -32,6 +32,7 @@ function PostQuse(dogs) {
           </div>`;
             $("#main").prepend(SHtml);
             $("#Ques").click();
+            document.getElementById("QQues").value="";
         } else {
             alert("提问失败，该服务暂不可用。");
             $("#Ques").click();

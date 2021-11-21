@@ -24,6 +24,9 @@ from tools.user import get_dog_i,get_dog_id
 
 app = Flask(__name__)
 app.config.update(RESTFUL_JSON=dict(ensure_ascii=False))
+app.config['REDIS_URL']="redis://127.0.0.1:6379/0"
+rc=FlaskRedis(app,decode_responses=True)
+
 api = Api(app)
 
 
@@ -39,6 +42,20 @@ parser.add_argument('type', type=str, help='类型')
 
 
 
+def doglimt(dogip):
+    print(dogip)
+    if rc.exists("nyaip:{}".format(dogip)):
+        dog=rc.incr("nyaip:{}".format(dogip))
+        if dog>20:
+            rc.expire("nyaip:{}".format(dogip), 3600)
+            return False
+        else:
+            return True
+    else:
+        rc.set("nyaip:{}".format(dogip), 1,ex=3600)
+        return True
+
+
 class addog(Resource):
     def post(self):
         """
@@ -47,7 +64,11 @@ class addog(Resource):
         args = parser.parse_args()
         ty=args['type']
         if ty=="q":
-            return addq(args)
+            dogip=str(request.remote_addr)
+            if doglimt(dogip):
+                return addq(args)
+            else:
+                return {"r":"操作太频繁"}
         if ty=="a":
             return adda(args)
         return {"r":"ok","c":"???"}
