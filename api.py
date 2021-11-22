@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime, timedelta
 
 from flask import (Flask, abort, jsonify, redirect, request,
-                   send_from_directory, url_for)
+                   send_from_directory, url_for, render_template)
 from flask.globals import session
 from flask_redis import FlaskRedis
 from flask_restful import Api, Resource, abort, reqparse
@@ -36,7 +36,7 @@ parser.add_argument('p', type=str, help='密码')
 parser.add_argument('t', type=str, help='提问目标')
 parser.add_argument('r', type=float, help='显示概率')
 parser.add_argument('i', type=str, help='访问token',required=False)
-parser.add_argument('g', type=int, help='是否生成图片')
+parser.add_argument('g', type=int, help='组别')
 parser.add_argument('y', type=int, help='分页页数')
 parser.add_argument('type', type=str, help='类型')
 
@@ -162,6 +162,19 @@ def pwa(subpath):
     单页应用
     """
     return send_from_directory('static','index.html')
+
+@app.route('/u/<path:dogname>')
+@app.route('/user/<path:dogname>')
+def userpage(dogname):
+    """
+    用户页面
+    """
+    # return subpath
+    udog=get_user_by_uid(dogname)
+    if udog!="ERROR" and udog is not None:
+        return render_template('index.html',dogtitle="{}的提问箱".format(udog.name),dogimage=udog.avatar,dogdescription=udog.text)
+    else:
+        return render_template('index.html')
 
 
 

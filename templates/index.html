@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Nyabox</title>
+    <meta charset="utf-8">
+    {% if dogtitle %}
+    <meta name="og:title" content="{{ dogtitle }}">
+    {% else %}
+    <meta name="og:title" content="Nyabox~">
+    {% endif %}
+
+    {% if dogdescription %}
+    <meta name="og:description" content="{{dogdescription}}" />
+    {% else %}
+    <meta name="og:description" content="一个提问箱" />
+    {% endif %}
+
+    {% if dogimage %}
+    <meta name="og:image" content="{{dogimage}}" />
+    {% else %}
+    <meta name="og:image" content="https://www.dogcraft.top/avatar.jpg" />
+    {% endif%}
+    
+    <meta property="og:type" content="article" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Nyabox">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/config.js"></script>
+    <script src="/static/userpage.js"></script>
+    <script src="/static/mainpage.js"></script>
+    <script src="/static/quespage.js"></script>
+    <script src="/static/homepage.js"></script>
+    <script src="/static/main.js"></script>
+
+
+</head>
+
+<body>
+
+    <style>
+
+    </style>
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+
+        <h1 id='btt'>Nyabox</h1>
+        <br>
+        <h4>一个提问箱</h4>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+
+        <a class="navbar-brand" href="javascript:void(0)">Nyabox</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://m.dogcraft.top"">DMI</a>
+                </li>
+                <!-- <li class=" nav-item">
+                        <a class="nav-link" onclick="ctadmin();" href="javascript:void(0)">管理</a>
+                </li> -->
+                <li class="nav-item">
+                    <a id="usernamedog" class="nav-link" onclick="ctadmin();" href="javascript:void(0)">登录</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="main">
+
+    </div>
+
+    <div id="footdoge" class="dog text-center">
+
+    </div>
+
+    <div class="jumbotron text-center " style="margin-bottom:0">
+        <p>
+        </p>
+        <p>© 2021 Dogcraft</p>
+        <p><a href="http://www.beian.miit.gov.cn/">鲁ICP备19044668号-1</a></p>
+    </div>
+    <!-- <p></p> -->
+    <div id="dogcp">
+
+    </div>
+    <!-- <script src="dog.js"></script> -->
+
+</body>
+
+</html>
