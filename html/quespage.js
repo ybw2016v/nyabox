@@ -7,7 +7,7 @@ function addQues(data, doginfo) {
     let QuesCardHtml = `<div class="card">
                     <div class="card-body" id="${data.res.id}">
                     <div class="contain ">
-                    <span class="qdogname" id="${data.res.tid}"><a href="/page/u/${data.res.tid}"">${doginfo.name}</a></span><span>收到了问题:</span>
+                    <span class="qdogname" id="${data.res.tid}"><a href="/u/${data.res.tid}"">${doginfo.name}</a></span><span>收到了问题:</span>
                     </div>
                     <hr>
                     <div>
@@ -106,7 +106,7 @@ function showQuesPage(qid) {
         Nowpath = window.location.pathname;
         console.log(Nowpath);
         shu = Nowpath.split("/");
-        qid = shu[3];
+        qid = shu[2];
         ShowQues(qid);
     }
 

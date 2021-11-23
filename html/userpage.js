@@ -9,7 +9,7 @@ function showUserPage(uid) {
         Nowpath = window.location.pathname;
     console.log(Nowpath);
     shu = Nowpath.split("/");
-    uid = shu[3];
+    uid = shu[2];
     }
     window.uid = uid;
     AddUserAns(uid,window.UserAnsNum);

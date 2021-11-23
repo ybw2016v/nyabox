@@ -151,10 +151,7 @@ class GetCById(Resource):
 
 @app.route("/")
 def hel():
-    """
-    docstring
-    """
-    return {"server":"runing"}
+    return render_template("index.html")
 
 @app.route('/page/<path:subpath>')
 def pwa(subpath):
@@ -175,6 +172,26 @@ def userpage(dogname):
         return render_template('index.html',dogtitle="{}的提问箱".format(udog.name),dogimage=udog.avatar,dogdescription=udog.text)
     else:
         return render_template('index.html')
+
+@app.route('/q/<path:dogname>')
+@app.route('/ques/<path:dogname>')
+def quespage(dogname):
+    """
+    用户页面
+    """
+    # return subpath
+    qdog=get_ques_by_uid(dogname)
+    if qdog!="ERROR" and qdog is not None:
+        return render_template('index.html',dogdescription=qdog.text)
+    else:
+        return render_template('index.html')
+
+@app.route('/<path:dogname>')
+def defaultpage(dogname):
+    """
+    默认页面
+    """
+    return render_template('index.html')
 
 
 

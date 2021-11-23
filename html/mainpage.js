@@ -33,12 +33,12 @@ function addPage(N = 0) {
                         DogDateTime = postTime2 + TimeStringDoge2;
                         CardHtml = `<div class="card">
                         <div class="card-body" id="${item.id}">
-                            <img id="avatar-${item.id}" src="${dogavatar}" class="dogavatar"><span class="dogname"><a href="/page/u/${item.user.uid}">${item.user.name}</a></span>
+                            <img id="avatar-${item.id}" src="${dogavatar}" class="dogavatar"><span class="dogname"><a href="/u/${item.user.uid}">${item.user.name}</a></span>
                             <span class="posttime badge badge-pill badge-info">${DogDateTime} </span>
             
                             <div class="contain cont ">
                                 回答了问题：<br>
-                                <a href="/page/q/${item.id}" target="_blank">${item.c}</a>
+                                <a href="/q/${item.id}" target="_blank">${item.c}</a>
                             </div>
     
                         </div>

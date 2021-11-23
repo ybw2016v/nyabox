@@ -37,7 +37,7 @@ function dogin() {
 }
 
 function gohome() {
-  location.href = "/page/home/";
+  location.href = "/home/";
 }
 
 window.onload=function () {
