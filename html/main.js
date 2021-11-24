@@ -11,6 +11,7 @@ window.addEventListener('popstate', function (e) {
 window.onload = function () {
     adddoglink();
     dogroute(location.href, false);
+    cklogin()
 }
 
 
@@ -70,4 +71,16 @@ async function getUserInfo(uid) {
 }
 
 
-
+function cklogin() {
+    doginfo = localStorage.getItem("doginfo");
+    if (doginfo) {
+        // console.log(doginfo);
+        infodog=JSON.parse(doginfo);
+        const loginbt=document.getElementById("usernamedog");
+        loginbt.innerText=infodog.name;
+        loginbt.href="/home/";
+    } else {
+        const loginbt=document.getElementById("usernamedog");
+        loginbt.href="/static/login.html";
+    }
+}

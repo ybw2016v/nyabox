@@ -178,3 +178,11 @@ img {
 .jumbotron {
     background: rgba(30, 219, 233, 0.26);
 }
+
+.logdogb{
+    width: 100%;
+}
+
+.logdogeb{
+    margin-left: auto;
+}
