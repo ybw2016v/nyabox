@@ -36,6 +36,9 @@ function dogroute(doge, ldog = true) {
             case "ques":
                 showQuesPage();
                 break;
+            case "static":
+                location.href=doge;
+                break;
             default:
                 showMainPage();
                 break;

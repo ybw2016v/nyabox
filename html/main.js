@@ -81,6 +81,6 @@ function cklogin() {
         loginbt.href="/home/";
     } else {
         const loginbt=document.getElementById("usernamedog");
-        loginbt.href="/static/login.html";
+        loginbt.href="/static/auth.html";
     }
 }
