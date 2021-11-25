@@ -57,7 +57,7 @@ async function getUserInfo(uid) {
     if (window.doglist[uid]) {
         return window.doglist[uid];
     } else {
-        res = await $.post("http://127.0.0.1:5000/api/getd/", {
+        res = await $.post(APIURL+"/api/getd/", {
             t: uid
         });
         if (res.r == "OK" && res.c) {

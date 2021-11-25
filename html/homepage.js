@@ -7,7 +7,7 @@ function AddHomeUserInfo(token) {
             // console.log(data.c);
             UserHomeHtml = `<div class="card">
             <div class="card-body" id="${data.c.uid}">
-                <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname">${data.c.name}</span>
+                <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname"><a href="/u/${data.c.uid}">${data.c.name}</a></span>
                 <span class="posttime badge badge-pill badge-info">${data.c.nid}@m.dogcraft.top</span>
 
                 <div class="contain cont ques" id="text-${data.c.uid}">

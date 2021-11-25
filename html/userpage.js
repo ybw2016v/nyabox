@@ -64,7 +64,7 @@ function AddUserAns(uid, N = 0) {
             if (data.r == "OK") {
                 UserCardHtml = `<div class="card">
                 <div class="card-body" id="${data.c.uid}">
-                    <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname">${data.c.name}</span>
+                    <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname"><a href="/u/${data.c.uid}">${data.c.name}</a></span>
                     <span class="posttime badge badge-pill badge-info"><a href="https://m.dogcraft.top/users/${data.c.mid}">${data.c.nid}@m.dogcraft.top</a></span>
     
                     <div class="contain cont ques" id="text-${data.c.uid}">
