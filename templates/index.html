@@ -2,26 +2,28 @@
 <html lang="en">
 
 <head>
-    <title>Nyabox</title>
+    
     <meta charset="utf-8">
     {% if dogtitle %}
-    <meta name="og:title" content="{{ dogtitle }}">
+    <title>{{ dogtitle }}</title>
+    <meta property="og:title" content="{{ dogtitle }}">
     {% else %}
-    <meta name="og:title" content="Nyabox~">
+    <title>Nyabox~</title>
+    <meta property="og:title" content="Nyabox~">
     {% endif %}
 
     {% if dogdescription %}
-    <meta name="og:description" content="{{dogdescription}}" />
+    <meta property="og:description" content="{{dogdescription}}" />
     {% else %}
-    <meta name="og:description" content="一个提问箱" />
+    <meta property="og:description" content="一个提问箱" />
     {% endif %}
 
     {% if dogimage %}
-    <meta name="og:image" content="{{dogimage}}" />
+    <meta property="og:image" content="{{dogimage}}" />
     {% else %}
-    <meta name="og:image" content="https://www.dogcraft.top/avatar.jpg" />
+    <meta property="og:image" content="https://www.dogcraft.top/avatar.jpg" />
     {% endif%}
-    
+    <meta property="og:site_name" content="NyaBox - nya.neko.red"/>
     <meta property="og:type" content="article" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
