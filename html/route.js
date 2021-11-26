@@ -7,11 +7,12 @@ function checkurl(e) {
 
 function dogroute(doge, ldog = true) {
     // console.log(doge);
+    document.title = "Nyabox ~ ";
     dogurl = new URL(doge);
     if (dogurl.origin == location.origin) {
         const dogpath = dogurl.pathname;
         const shu = dogpath.split("/");
-        console.log(shu);
+        // console.log(shu);
         if (ldog) {
             history.pushState({ "page": dogpath }, shu[1], doge);
         }
@@ -51,12 +52,12 @@ function dogroute(doge, ldog = true) {
 
 
 function doglink(dohu) {
-    console.log(dohu);
+    // console.log(dohu);
 
     if (dohu != null) {
         var allLink = dohu.querySelectorAll('a');
     } else {
-        console.log("dog");
+        // console.log("dog");
         var allLink = document.querySelectorAll('a');
     }
     for (let i = 0, len = allLink.length; i < len; i++) {

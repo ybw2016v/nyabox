@@ -16,7 +16,7 @@ function showUserPage(uid) {
 }
 
 function PostQuse(dogs) {
-    console.log(dogs);
+    // console.log(dogs);
     const Ques=document.getElementById("QQues").value;
 
     $.post(APIURL+"/api/create/",{
@@ -62,6 +62,7 @@ function AddUserAns(uid, N = 0) {
             t: uid
         }, function (data, status) {
             if (data.r == "OK") {
+                document.title = `${data.c.name} 的提问箱`;
                 UserCardHtml = `<div class="card">
                 <div class="card-body" id="${data.c.uid}">
                     <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname"><a href="/u/${data.c.uid}">${data.c.name}</a></span>
