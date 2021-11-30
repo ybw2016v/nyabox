@@ -21,6 +21,7 @@ from tools.getuser import get_user_by_i, get_user_by_uid
 from tools.gid import gen_dog_id
 from tools.listq import get_all_qa, get_my_q, get_user_qa
 from tools.user import get_dog_i,get_dog_id
+from tools.rmdq import rmqa_by_id_i
 
 app = Flask(__name__)
 app.config.update(RESTFUL_JSON=dict(ensure_ascii=False))
@@ -138,6 +139,14 @@ class GetQuesById(Resource):
         args = parser.parse_args()
         return get_q_by_id(args)
 
+class RmQuesById(Resource):
+    def post(self):
+        """
+        根据id删除问题
+        """
+        args = parser.parse_args()
+        return rmqa_by_id_i(args)
+
 class GetCById(Resource):
     def post(self):
         """
@@ -205,6 +214,7 @@ api.add_resource(Logindog, '/api/login/')
 api.add_resource(GetQuesById, '/api/getq/')
 api.add_resource(GetCById, '/api/getc/')
 api.add_resource(IDdog, '/api/getd/')
+api.add_resource(RmQuesById, '/api/rmqa/')
 # api.add_resource(logindog, '/api/login/')
 # api.add_resource(doginfos, '/api/user/')
 # api.add_resource(updog, '/api/update/')

@@ -6,7 +6,7 @@ function GetUserToken() {
       return false;
     }
     else {
-        ck = $.post("/api/i/",
+        ck = $.post(APIURL+"/api/i/",
         {
           i: doginfostr
         },

@@ -19,7 +19,7 @@ console.log(urlp);
 if ((urlp.token_type != "key")) {
     alert("错误调用！");
 } else {
-    ck = $.post("/api/login/",
+    ck = $.post(APIURL+"/api/login/",
         {
           t: urlp.access_token
         },
