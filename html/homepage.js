@@ -1,6 +1,6 @@
 function AddHomeUserInfo(token) {
     $("#footdoge").html("");
-    $.post(APIURL+"/api/i/", {
+    $.post(APIURL + "/api/i/", {
         "i": token
     }, function (data, status) {
         if (data.r == "OK") {
@@ -107,7 +107,7 @@ function AddUserQ1(N = 0) {
     Dql2.className = "nav-link";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link";
-    $.post(APIURL+"/api/lmqa/", {
+    $.post(APIURL + "/api/lmqa/", {
         "i": window.token,
         "type": "b",
         "y": N
@@ -116,7 +116,7 @@ function AddUserQ1(N = 0) {
             // console.log(data.c);
             window.homepage = N;
             AddQl(data);
-            
+
         }
     }
     );
@@ -132,14 +132,14 @@ function AddUserQ2(N = 0) {
     Dql2.className = "nav-link active";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link";
-    $.post(APIURL+"/api/lmqa/", {
+    $.post(APIURL + "/api/lmqa/", {
         "i": window.token,
         "type": "0",
         "y": N
     }, function (data, status) {
         if (data.r == "OK") {
             // console.log(data.c);
-            
+
             window.homepage = N;
             AddQl(data);
         }
@@ -156,7 +156,7 @@ function AddUserQ3(N = 0) {
     Dql2.className = "nav-link";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link active";
-    $.post(APIURL+"/api/lmqa/", {
+    $.post(APIURL + "/api/lmqa/", {
         "i": window.token,
         "type": "a",
         "y": N
@@ -173,8 +173,8 @@ function AddUserQ3(N = 0) {
 
 function AddQl(data) {
     $("#homedogqlist").html("");
-            if ((data.res.length == 0) || (data.num == 0)) {
-                DogHomeListHtnl = `<div class="card">
+    if ((data.res.length == 0) || (data.num == 0)) {
+        DogHomeListHtnl = `<div class="card">
                 <div class="card-body" id="notfound">
                     <div class="contain ">
                         <h2 class="text-center sdkldog">404 NotFound</h2>
@@ -185,15 +185,15 @@ function AddQl(data) {
                     </div>
                 </div>
             </div>`;
-                $("#homedogqlist").html(DogHomeListHtnl);
-            } else {
-                for (i = 0; i < data.res.length; i++) {
-                    const item = data.res[i];
-                    // console.log(item);
-                    if (item.hid) {
-                        qdtime=getDogDateTime(item.time);
-                        adtime=getDogDateTime(item.ans.time);
-                        DogHomeListHtnl = `<div class="card">
+        $("#homedogqlist").html(DogHomeListHtnl);
+    } else {
+        for (i = 0; i < data.res.length; i++) {
+            const item = data.res[i];
+            // console.log(item);
+            if (item.hid) {
+                qdtime = getDogDateTime(item.time);
+                adtime = getDogDateTime(item.ans.time);
+                DogHomeListHtnl = `<div class="card">
                     <div class="card-body" id="${item.id}">
                         <h6>Q:</h6>
                         <div class="contain  ques" id="QT${item.id}">
@@ -221,10 +221,10 @@ function AddQl(data) {
                             回答时间:${adtime}</span>
                     </div>
                 </div>`;
-                        
-                    } else {
-                        qdtime=getDogDateTime(item.time);
-                        DogHomeListHtnl = `<div class="card">
+
+            } else {
+                qdtime = getDogDateTime(item.time);
+                DogHomeListHtnl = `<div class="card">
                     <div class="card-body" id="${item.id}">
                         <h6>Q:</h6>
                         <div class="contain  ques" id="QT${item.id}">
@@ -247,101 +247,101 @@ function AddQl(data) {
                     </div>
     
                 </div>`;
-                    }
-                    $("#homedogqlist").append(DogHomeListHtnl);
-                }
             }
-            FenYe(data.num);
+            $("#homedogqlist").append(DogHomeListHtnl);
+        }
+    }
+    FenYe(data.num);
 }
 
 function FenYe(num) {
-    const MaxPage=Math.ceil(num/10);
-    window.MaxPage=MaxPage;
-    YeInfo=document.createElement("div");
-    YeInfo.innerText=`共${MaxPage}页 第${window.homepage+1}页`;
-    YeHtml=document.createElement("ul");
-    YeHtml.className="pagination justify-content-center";
-    QianYiYe=document.createElement("li");
-    QianYiYe.className="page-item";
-    QianYiYe.innerHTML=`<a class="page-link" href="javascript:void(0);">前一页</a>`;
-    HouYiYe=document.createElement("li");
-    HouYiYe.className="page-item";
-    HouYiYe.innerHTML=`<a class="page-link" href="javascript:void(0);">后一页</a>`;
-    if (window.homepage==0) {
-        QianYiYe.className="page-item disabled";
+    const MaxPage = Math.ceil(num / 10);
+    window.MaxPage = MaxPage;
+    YeInfo = document.createElement("div");
+    YeInfo.innerText = `共${MaxPage}页 第${window.homepage + 1}页`;
+    YeHtml = document.createElement("ul");
+    YeHtml.className = "pagination justify-content-center";
+    QianYiYe = document.createElement("li");
+    QianYiYe.className = "page-item";
+    QianYiYe.innerHTML = `<a class="page-link" href="javascript:void(0);">前一页</a>`;
+    HouYiYe = document.createElement("li");
+    HouYiYe.className = "page-item";
+    HouYiYe.innerHTML = `<a class="page-link" href="javascript:void(0);">后一页</a>`;
+    if (window.homepage == 0) {
+        QianYiYe.className = "page-item disabled";
     }
-    if (window.homepage==window.MaxPage-1) {
-        HouYiYe.className="page-item disabled";
+    if (window.homepage == window.MaxPage - 1) {
+        HouYiYe.className = "page-item disabled";
     }
-    QianYiYe.addEventListener("click",function(){Qian();});
-    HouYiYe.addEventListener("click",function(){Hou();});
+    QianYiYe.addEventListener("click", function () { Qian(); });
+    HouYiYe.addEventListener("click", function () { Hou(); });
     YeHtml.appendChild(QianYiYe);
     YeHtml.appendChild(HouYiYe);
     $("#footdoge").html(YeInfo);
     $("#footdoge").append(YeHtml);
 }
 function Qian() {
-    if (window.homepage==0) {
+    if (window.homepage == 0) {
         // QianYiYe.className="page-item disabled";
         return "dog";
     }
     switch (window.qltype) {
         case "ql1":
-            AddUserQ1(window.homepage-1);
+            AddUserQ1(window.homepage - 1);
             break;
         case "ql2":
-            AddUserQ2(window.homepage-1);
+            AddUserQ2(window.homepage - 1);
             break;
         case "ql3":
-            AddUserQ3(window.homepage-1);
+            AddUserQ3(window.homepage - 1);
             break;
         default:
-            AddUserQ1(window.homepage-1);
+            AddUserQ1(window.homepage - 1);
             break;
     }
 }
 function Hou() {
-    if (window.homepage==window.MaxPage-1) {
+    if (window.homepage == window.MaxPage - 1) {
         // HouYiYe.className="page-item disabled";
         return "dog";
     }
     switch (window.qltype) {
         case "ql1":
-            AddUserQ1(window.homepage+1);
+            AddUserQ1(window.homepage + 1);
             break;
         case "ql2":
-            AddUserQ2(window.homepage+1);
+            AddUserQ2(window.homepage + 1);
             break;
         case "ql3":
-            AddUserQ3(window.homepage+1);
+            AddUserQ3(window.homepage + 1);
             break;
         default:
-            AddUserQ1(window.homepage+1);
+            AddUserQ1(window.homepage + 1);
             break;
     }
 }
 
 function AnsQues(dog) {
-    const qid=dog.getAttribute("qid");
-    document.getElementById("ansb").setAttribute("qid",qid);
-    document.getElementById("quesdog").innerText=document.getElementById(`QT${qid}`).innerText;
+    const qid = dog.getAttribute("qid");
+    document.getElementById("ansb").setAttribute("qid", qid);
+    document.getElementById("quesdog").innerText = document.getElementById(`QT${qid}`).innerText;
     $("#Loading").text("");
     $("#Anse").modal("show");
 }
 function PostAns() {
     console.log("POS");
     // console.log(this);
-    const qid=this.getAttribute("qid");
-    const ans=document.getElementById("AAns").value;
-    $.post(APIURL+"/api/create/",{
-        "type":"a",
-        "i":window.token,
-        "c":ans,
-        "t":qid
-    },function (data,status) {
-        if (data.r=="OK") {
+    const qid = this.getAttribute("qid");
+    const ans = document.getElementById("AAns").value;
+    $.post(APIURL + "/api/create/", {
+        "type": "a",
+        "i": window.token,
+        "c": ans,
+        "t": qid
+    }, function (data, status) {
+        if (data.r == "OK") {
             // alert("提问成功，请耐心等待回答。");
-            const SHtml=`<div class="alert alert-success alert-dismissible fade show">
+            const SHtml = `<div class="alert alert-success alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>回答成功!回答ID： ${data.id}</strong> 
           </div>`;
@@ -355,12 +355,39 @@ function PostAns() {
     $("#Loading").text("Loading……");
 }
 
+function DelQues(eldog) {
+    console.log("DEL");
+    // console.log(this);
+    const qid = eldog.getAttribute("qid");
+    const rmdogimnfo = `确定删除${qid}及其相关回答吗？\n\n请注意，删除后不可恢复。`;
+    if (confirm(rmdogimnfo)) 
+    {
+        token = localStorage.getItem("i");
+        $.post(APIURL + "/api/rmqa/", {
+            "i": token,
+            "t": qid
+        }, function (data, status) {
+            if (data.r == "OK") {
+                alert("删除成功.");
+                dogroute(location.href,false);
+
+                // window.location.href /= "./";
+            } else {
+                alert("删除失败，该服务暂不可用。");
+            }
+        });
+    } 
+    else 
+    { }
+}
+
+
 function showHomePage() {
-    token=localStorage.getItem("i");
+    token = localStorage.getItem("i");
     if (token) {
         AddHomeUserInfo(token);
     } else {
         alert("请先登录");
-        window.location.href="/static/auth.html";
+        window.location.href = "/static/auth.html";
     }
 }
