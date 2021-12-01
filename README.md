@@ -6,16 +6,16 @@
 
 * ~~单页~~三页应用，手搓pjax
 * 前后端分离，兼顾og标签
-* 使用类Oauth2.0认证，通过[DMI](https://m.dogcraft.top)账号登录
+* 使用类Oauth2.0认证，能且仅能通过[DMI](https://m.dogcraft.top)账号登录，登录插件[mkauth](https://github.com/ybw2016v/mkauth)
 
 ## Todo
 
-- [x] ~~删除~~~~功能~~
-* 简单的用户设置
-* 单页应用
-* 浏览器通知
-* 管理页面
-* 邮件通知
-* 支持Markdown
-* XSS防止
+- [x] ~~删除功能~~
+- [ ] 简单的用户设置
+- [ ] 单页应用
+- [ ] 浏览器通知
+- [ ] 管理页面
+- [ ] 邮件通知
+- [ ] 支持Markdown
+- [ ] XSS防止
 
