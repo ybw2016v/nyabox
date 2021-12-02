@@ -29,3 +29,6 @@ class Udog(Base):
     uuid = Column(String(256), unique=False)
     text = Column(Text, unique=False)
     ip = Column(Text, unique=False)
+    isAccept = Column(Boolean, unique=False,default=True)
+    isShow = Column(Boolean, unique=False,default=True)
+    isAdmin = Column(Boolean, unique=False,default=False)

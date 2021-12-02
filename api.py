@@ -40,7 +40,8 @@ parser.add_argument('i', type=str, help='访问token',required=False)
 parser.add_argument('g', type=int, help='组别')
 parser.add_argument('y', type=int, help='分页页数')
 parser.add_argument('type', type=str, help='类型')
-
+parser.add_argument('isShow', type=bool, help='id')
+parser.add_argument('isAccept', type=bool, help='id')
 
 
 def doglimt(dogip):
