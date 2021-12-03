@@ -156,9 +156,6 @@ class GetCById(Resource):
         args = parser.parse_args()
         return get_c_by_id(args)
 
-
-
-
 @app.route("/")
 def hel():
     return render_template("index.html")
