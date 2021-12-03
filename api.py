@@ -22,6 +22,7 @@ from tools.gid import gen_dog_id
 from tools.listq import get_all_qa, get_my_q, get_user_qa
 from tools.user import get_dog_i,get_dog_id
 from tools.rmdq import rmqa_by_id_i
+from tools.chus import ch_u_s
 
 app = Flask(__name__)
 app.config.update(RESTFUL_JSON=dict(ensure_ascii=False))
@@ -156,6 +157,15 @@ class GetCById(Resource):
         args = parser.parse_args()
         return get_c_by_id(args)
 
+class ChangeDog(Resource):
+    def post(self):
+        """
+        更改用户信息
+        """
+        args = parser.parse_args()
+        return ch_u_s(args)
+
+
 @app.route("/")
 def hel():
     return render_template("index.html")
@@ -213,6 +223,7 @@ api.add_resource(GetQuesById, '/api/getq/')
 api.add_resource(GetCById, '/api/getc/')
 api.add_resource(IDdog, '/api/getd/')
 api.add_resource(RmQuesById, '/api/rmqa/')
+api.add_resource(ChangeDog, '/api/chus/')
 # api.add_resource(logindog, '/api/login/')
 # api.add_resource(doginfos, '/api/user/')
 # api.add_resource(updog, '/api/update/')

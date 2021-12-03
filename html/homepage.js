@@ -13,10 +13,10 @@ function AddHomeUserInfo(token) {
                 <div class="contain cont ques" id="text-${data.c.uid}">
                 </div>
                 <hr>
-                <button type="button" class="btn btn-primary" data-target="#Ques">
+                <button type="button" class="btn btn-primary" data-target="#Quit">
                     退出登录
                 </button>
-                <button type="button" class="btn btn-primary" data-target="#Ques">
+                <button type="button" class="btn btn-primary" data-target="#Setting">
                     设置
                 </button>
             </div>
