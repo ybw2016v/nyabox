@@ -71,8 +71,8 @@ function AddUserAns(uid, N = 0) {
                     <div class="contain cont ques" id="text-${data.c.uid}">
                     </div>
                     <hr>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Ques">
-                        我要提问
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Ques" ${data.c.isAccept?"":"disabled"} >
+                    ${data.c.isAccept?"我要提问":"提问已关闭"}
                     </button>
                 </div>
                 <div class="card-footer">

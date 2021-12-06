@@ -411,13 +411,15 @@ function UpdateUserSet() {
          dataType:"json", 
          data: JSON.stringify({
             "i": token,
-            "isAccept": false
+            "isAccept": newAcept,
+            "isShow": newShow
         }), success: function (data, status) {
             if (data.r == "OK") {
                 alert("设置成功！");
             } else {
                 alert("设置失败，该服务暂不可用。");
             }
+            $("#Setting").click();
         }
     });
 }
