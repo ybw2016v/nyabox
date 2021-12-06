@@ -13,10 +13,10 @@ function AddHomeUserInfo(token) {
                 <div class="contain cont ques" id="text-${data.c.uid}">
                 </div>
                 <hr>
-                <button type="button" class="btn btn-primary" data-target="#Quit">
+                <button type="button" class="btn btn-primary"  data-target="#Quit">
                     退出登录
                 </button>
-                <button type="button" class="btn btn-primary" data-target="#Setting">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Setting">
                     设置
                 </button>
             </div>
@@ -59,6 +59,48 @@ function AddHomeUserInfo(token) {
             </div>
         </div>
 
+        <div class="modal fade" id="Setting">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- 模态框头部 -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">设定</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- 模态框主体 -->
+                    <div class="modal-body">
+                    <label for="comment">接受新问题:</label>
+                    <div id="quesdog">
+                    </div>
+                    <hr>
+                    <form name="S1f">
+                    <label class="radio-inline"><input type="radio" id="acpt0" name="isAceptt" ${data.c.isAccept ? "checked" : ""}>接受提问</label>
+                    <label class="radio-inline"><input type="radio" id="acpt1" name="isAceptt" ${data.c.isAccept ? "" : "checked"} >不再接受提问</label>
+                    </form>
+                    <br>
+
+                    <label for="comment">隐藏账号:</label>
+                    <div id="quesdog">
+                    </div>
+                    <hr>
+                    <form name="S2f">
+                    <label class="radio-inline"><input type="radio" id="show0" name="isShow" ${data.c.isShow ? "checked" : ""}>不隐藏</label>
+                    <label class="radio-inline"><input type="radio" id="show1" name="isShow" ${data.c.isShow ? "" : "checked"} >隐藏</label>
+                  </form>
+
+                    </div>
+                    <div id="Loading"></div>
+
+                    <!-- 模态框底部 -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="set" >确定</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
 
         <div id="hdlt"><div class="container mqus">
         <h5>我的问题</h5>
@@ -89,6 +131,8 @@ function AddHomeUserInfo(token) {
             Dql2.addEventListener("click", function () { AddUserQ2(); });
             const Dql3 = document.getElementById("ql3");
             Dql3.addEventListener("click", function () { AddUserQ3(); });
+            const Upset = document.getElementById("set");
+            Upset.addEventListener("click", function () { UpdateUserSet(); });
             AddUserQ1();
         }
         else {
@@ -355,13 +399,36 @@ function PostAns() {
     $("#Loading").text("Loading……");
 }
 
+function UpdateUserSet() {
+    console.log("UpdateSeeting");
+    token = localStorage.getItem("i");
+    const newAcept = document.getElementById("acpt0").checked;
+    const newShow = document.getElementById("show0").checked;
+
+    $.ajax({
+        url: (APIURL + "/api/chus/"), type: "POST",
+         contentType: "application/json",
+         dataType:"json", 
+         data: JSON.stringify({
+            "i": token,
+            "isAccept": false
+        }), success: function (data, status) {
+            if (data.r == "OK") {
+                alert("设置成功！");
+            } else {
+                alert("设置失败，该服务暂不可用。");
+            }
+        }
+    });
+}
+
+
 function DelQues(eldog) {
     console.log("DEL");
     // console.log(this);
     const qid = eldog.getAttribute("qid");
     const rmdogimnfo = `确定删除${qid}及其相关回答吗？\n\n请注意，删除后不可恢复。`;
-    if (confirm(rmdogimnfo)) 
-    {
+    if (confirm(rmdogimnfo)) {
         token = localStorage.getItem("i");
         $.post(APIURL + "/api/rmqa/", {
             "i": token,
@@ -369,16 +436,15 @@ function DelQues(eldog) {
         }, function (data, status) {
             if (data.r == "OK") {
                 alert("删除成功.");
-                dogroute(location.href,false);
+                dogroute(location.href, false);
 
                 // window.location.href /= "./";
             } else {
                 alert("删除失败，该服务暂不可用。");
             }
         });
-    } 
-    else 
-    { }
+    }
+    else { }
 }
 
 

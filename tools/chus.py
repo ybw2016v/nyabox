@@ -16,4 +16,4 @@ def ch_u_s(args):
     if args["isAccept"] is not None:
         udog.isAccept = args["isAccept"]
     db_session.commit()
-    return {"r":200}
+    return {"r":"OK"}
