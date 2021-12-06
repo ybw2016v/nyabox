@@ -16,7 +16,9 @@ window.onload = function () {
 
 
 
-
+function CommitJSON(URL,data,callback) {
+    $.ajax({url: URL,type:"POST",contentType: "application/json",data: JSON.stringify(data),dataType: "json",success: callback});
+}
 
 
 
@@ -57,7 +59,7 @@ async function getUserInfo(uid) {
     if (window.doglist[uid]) {
         return window.doglist[uid];
     } else {
-        res = await $.post(APIURL+"/api/getd/", {
+        res = await CommitJSON(APIURL+"/api/getd/", {
             t: uid
         });
         if (res.r == "OK" && res.c) {

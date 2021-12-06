@@ -13,7 +13,7 @@ function showMainPage() {
 }
 
 function addPage(N = 0) {
-    ck = $.post(APIURL+"/api/list/",
+    ck = CommitJSON(APIURL+"/api/list/",
         {
             y: N
         },

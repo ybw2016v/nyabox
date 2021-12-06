@@ -19,7 +19,7 @@ function PostQuse(dogs) {
     // console.log(dogs);
     const Ques=document.getElementById("QQues").value;
 
-    $.post(APIURL+"/api/create/",{
+    CommitJSON(APIURL+"/api/create/",{
         "type":"q",
         "c":Ques,
         "t":window.uid
@@ -58,7 +58,7 @@ function AddUserAns(uid, N = 0) {
         window.doglist = {};
     }
     if (N == 0) {
-        $.post(APIURL+"/api/getd/", {
+        CommitJSON(APIURL+"/api/getd/", {
             t: uid
         }, function (data, status) {
             if (data.r == "OK") {
@@ -132,7 +132,7 @@ function AddUserAns(uid, N = 0) {
         }
         );
     }
-    $.post(APIURL+"/api/lsqa/",
+    CommitJSON(APIURL+"/api/lsqa/",
         {
             t: uid,
             y: N

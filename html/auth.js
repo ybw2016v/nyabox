@@ -6,7 +6,7 @@ function GetUserToken() {
       return false;
     }
     else {
-        ck = $.post(APIURL+"/api/i/",
+        ck = CommitJSON(APIURL+"/api/i/",
         {
           i: doginfostr
         },

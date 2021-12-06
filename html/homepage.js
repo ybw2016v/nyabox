@@ -1,6 +1,6 @@
 function AddHomeUserInfo(token) {
     $("#footdoge").html("");
-    $.post(APIURL + "/api/i/", {
+    CommitJSON(APIURL + "/api/i/", {
         "i": token
     }, function (data, status) {
         if (data.r == "OK") {
@@ -139,7 +139,7 @@ function AddHomeUserInfo(token) {
             alart("错误，该服务暂不可用");
             window.location.href = "/";
         }
-    })
+    }),dataType="json"
 }
 
 function AddUserQ1(N = 0) {
@@ -151,7 +151,7 @@ function AddUserQ1(N = 0) {
     Dql2.className = "nav-link";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link";
-    $.post(APIURL + "/api/lmqa/", {
+    CommitJSON(APIURL + "/api/lmqa/", {
         "i": window.token,
         "type": "b",
         "y": N
@@ -176,7 +176,7 @@ function AddUserQ2(N = 0) {
     Dql2.className = "nav-link active";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link";
-    $.post(APIURL + "/api/lmqa/", {
+    CommitJSON(APIURL + "/api/lmqa/", {
         "i": window.token,
         "type": "0",
         "y": N
@@ -200,7 +200,7 @@ function AddUserQ3(N = 0) {
     Dql2.className = "nav-link";
     const Dql3 = document.getElementById("ql3");
     Dql3.className = "nav-link active";
-    $.post(APIURL + "/api/lmqa/", {
+    CommitJSON(APIURL + "/api/lmqa/", {
         "i": window.token,
         "type": "a",
         "y": N
@@ -377,7 +377,7 @@ function PostAns() {
     // console.log(this);
     const qid = this.getAttribute("qid");
     const ans = document.getElementById("AAns").value;
-    $.post(APIURL + "/api/create/", {
+    CommitJSON(APIURL + "/api/create/", {
         "type": "a",
         "i": window.token,
         "c": ans,
@@ -430,7 +430,7 @@ function DelQues(eldog) {
     const rmdogimnfo = `确定删除${qid}及其相关回答吗？\n\n请注意，删除后不可恢复。`;
     if (confirm(rmdogimnfo)) {
         token = localStorage.getItem("i");
-        $.post(APIURL + "/api/rmqa/", {
+        CommitJSON(APIURL + "/api/rmqa/", {
             "i": token,
             "t": qid
         }, function (data, status) {

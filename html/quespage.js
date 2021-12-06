@@ -19,7 +19,7 @@ function addQues(data, doginfo) {
                     </div></div>`;
     $("#main").append(QuesCardHtml);
     if (data.res.hid) {
-        $.post(APIURL+"/api/getc/", { "t": data.res.hid }, function (data, status) {
+        CommitJSON(APIURL+"/api/getc/", { "t": data.res.hid }, function (data, status) {
             // console.log(data);
             if (data.r == "OK" && data.res) {
                 // console.log(data.res);
@@ -57,7 +57,7 @@ function ShowQues(qid) {
     if (!window.doglist) {
         window.doglist = {};
     }
-    $.post(`${APIURL}/api/getq/`, { "t": qid },
+    CommitJSON(`${APIURL}/api/getq/`, { "t": qid },
         function (data, status) {
             if (data.r == "OK" && data.res) {
                 var adogid = data.res.tid;
@@ -67,7 +67,7 @@ function ShowQues(qid) {
                     addQues(data, doginfo);
                 } else {
                     var Qinfo = data;
-                    $.post(APIURL+"/api/getd/", {
+                    CommitJSON(APIURL+"/api/getd/", {
                         t: data.res.tid
                     }, function (data, status) {
                         if (data.r == "OK" && data.c) {
