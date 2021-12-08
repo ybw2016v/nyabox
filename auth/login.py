@@ -6,7 +6,7 @@ from datetime import datetime
 
 import requests as r
 
-URL="https://m.dogcraft.top/api/i/"
+MKURL="https://m.dogcraft.top/api/i/"
 
 def create_user(args):
     """
@@ -15,7 +15,7 @@ def create_user(args):
     token=args["t"]
     print(token)
     jsondog={"i":token}
-    resdog=r.post(URL,json=jsondog)
+    resdog=r.post(MKURL,json=jsondog)
     tes=resdog.json()
     print(tes)
     if "id" not in tes:
