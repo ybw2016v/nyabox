@@ -6,6 +6,7 @@ from flask import (Flask, abort, jsonify, redirect, request,
 from flask.globals import session
 from flask_redis import FlaskRedis
 from flask_restful import Api, Resource, abort, reqparse
+from flask_executor import Executor
 from sqlalchemy import or_
 from sqlalchemy.sql.expression import text
 
@@ -28,7 +29,8 @@ app = Flask(__name__)
 app.config.update(RESTFUL_JSON=dict(ensure_ascii=False))
 app.config['REDIS_URL']="redis://127.0.0.1:6379/0"
 rc=FlaskRedis(app,decode_responses=True)
-
+app.config['EXECUTOR_MAX_WORKERS'] = 1
+executor = Executor(app)
 api = Api(app)
 
 
@@ -69,7 +71,7 @@ class addog(Resource):
         if ty=="q":
             dogip=str(request.remote_addr)
             if doglimt(dogip):
-                return addq(args)
+                return addq(args,executor)
             else:
                 return {"r":"操作太频繁"}
         if ty=="a":

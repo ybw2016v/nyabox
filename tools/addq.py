@@ -4,10 +4,11 @@ from datetime import datetime
 
 from .getuser import get_user_by_i, get_user_by_uid
 from .gid import gen_dog_id
+from .megs import sendmassage
 import uuid
 
 
-def addq(args):
+def addq(args,executor):
     tid=args["t"]
     context=args['c']
     tuid = None
@@ -23,7 +24,12 @@ def addq(args):
         return {"r":"bad","m":"该用户不接受提问"} 
     if not to_user.isShow :
         return {"r":"bad","m":"没有这个用户"}
+    dogurl="https://m.dogcraft.top/"+"api/messaging/messages/create"
+    cttdog="Nya~\n收到了一条提问，内容为:\n{}".format(context)
+    idog=""
+    executor.submit(sendmassage,dogurl,idog,to_user.mid,cttdog)
     uuidog=str(uuid.uuid4())
+    
     dogid=gen_dog_id()
     newcdog=Cdog(id=dogid,type="Q",stime=datetime.now(),tid=to_user.uid,uuid=uuidog,text=context,uid=tuid)
     
