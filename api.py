@@ -24,10 +24,11 @@ from tools.listq import get_all_qa, get_my_q, get_user_qa
 from tools.user import get_dog_i,get_dog_id
 from tools.rmdq import rmqa_by_id_i
 from tools.chus import ch_u_s
+import config
 
 app = Flask(__name__)
 app.config.update(RESTFUL_JSON=dict(ensure_ascii=False))
-app.config['REDIS_URL']="redis://127.0.0.1:6379/0"
+app.config['REDIS_URL']=config.REDIS_URL
 rc=FlaskRedis(app,decode_responses=True)
 app.config['EXECUTOR_MAX_WORKERS'] = 1
 executor = Executor(app)

@@ -27,7 +27,7 @@ def addq(args,executor):
     dogurl="https://m.dogcraft.top/"+"api/messaging/messages/create"
     cttdog="Nya~\n收到了一条提问，内容为:\n{}".format(context)
     idog=""
-    executor.submit(sendmassage,dogurl,idog,to_user.mid,cttdog)
+    executor.submit(sendmassage,to_user.mid,cttdog)
     uuidog=str(uuid.uuid4())
     
     dogid=gen_dog_id()
