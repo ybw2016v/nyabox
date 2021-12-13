@@ -11,7 +11,7 @@ function addQues(data, doginfo) {
                     </div>
                     <hr>
                     <div>
-                    ${data.res.c}
+                    ${CQues(data.res.c)}
                     </div>
                     </div>
                     <div class="card-footer">

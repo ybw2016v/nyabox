@@ -150,7 +150,7 @@ function AddUserAns(uid, N = 0) {
                     <div class="card-body" id="${item.id}">
                         <h6>Q:</h6>
                         <div class="contain  ques">
-                            ${item.c}
+                            ${CQues(item.c)}
                         </div>
                         <hr>
                         <h6>A:</h6>

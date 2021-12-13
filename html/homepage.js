@@ -241,7 +241,7 @@ function AddQl(data) {
                     <div class="card-body" id="${item.id}">
                         <h6>Q:</h6>
                         <div class="contain  ques" id="QT${item.id}">
-                            ${item.c}
+                            ${CQues(item.c)}
                         </div>
                         <hr>
                         <h6>A:</h6>
@@ -445,9 +445,7 @@ function DelQues(eldog) {
                 alert("删除失败，该服务暂不可用。");
             }
         });
-    }
-    else { }
-}
+    }item.c
 
 
 function showHomePage() {

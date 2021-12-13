@@ -38,7 +38,7 @@ function addPage(N = 0) {
             
                             <div class="contain cont ">
                                 回答了问题：<br>
-                                <a href="/q/${item.id}" target="_blank">${item.c}</a>
+                                <a href="/q/${item.id}" target="_blank">${CQues(item.c)}</a>
                             </div>
     
                         </div>

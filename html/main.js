@@ -91,3 +91,7 @@ function CMarkDown(indog) {
     var dhtml = marked.parse(indog);
     return DOMPurify.sanitize(dhtml);
 }
+
+function CQues(indog) {
+    return DOMPurify.sanitize(indog);
+}
