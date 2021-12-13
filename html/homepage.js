@@ -445,7 +445,9 @@ function DelQues(eldog) {
                 alert("删除失败，该服务暂不可用。");
             }
         });
-    }item.c
+    }
+    else { }
+}
 
 
 function showHomePage() {
