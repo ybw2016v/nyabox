@@ -246,7 +246,7 @@ function AddQl(data) {
                         <hr>
                         <h6>A:</h6>
                         <div class="contain  ques" id="${item.ans.id}">
-                            ${item.ans.c}
+                            ${CMarkDown(item.ans.c)}
                         </div>
                         <hr>
                     <div class="contain  ques" id="A-${item.id}">

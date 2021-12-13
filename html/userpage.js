@@ -156,7 +156,7 @@ function AddUserAns(uid, N = 0) {
                         <h6>A:</h6>
         
                         <div class="contain  ques" id="${item.ans.id}">
-                            ${item.ans.c}
+                            ${CMarkDown(item.ans.c)}
                         </div>
                     </div>
                     <div class="card-footer">

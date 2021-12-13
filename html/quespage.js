@@ -37,7 +37,7 @@ function addQues(data, doginfo) {
                                         回答:
                                         <hr>
                                         <div>
-                                            ${data.res.c}
+                                            ${CMarkDown(data.res.c)}
                                         </div>
                                     </div>
                                 </div>
