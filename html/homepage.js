@@ -13,7 +13,7 @@ function AddHomeUserInfo(token) {
                 <div class="contain cont ques" id="text-${data.c.uid}">
                 </div>
                 <hr>
-                <button type="button" class="btn btn-primary"  data-target="#Quit">
+                <button type="button" class="btn btn-primary" id="Quitsdog" data-target="#Quit">
                     退出登录
                 </button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Setting">
@@ -133,7 +133,10 @@ function AddHomeUserInfo(token) {
             Dql3.addEventListener("click", function () { AddUserQ3(); });
             const Upset = document.getElementById("set");
             Upset.addEventListener("click", function () { UpdateUserSet(); });
+            const Quitdogs=document.getElementById("Quitsdog");
+            Quitdogs.addEventListener("click",function(){QuitLogin();});
             AddUserQ1();
+            
         }
         else {
             alart("错误，该服务暂不可用");
@@ -457,5 +460,13 @@ function showHomePage() {
     } else {
         alert("请先登录");
         window.location.href = "/static/auth.html";
+    }
+}
+function QuitLogin() {
+    if (confirm("确定要退出登录吗？")) {
+        localStorage.removeItem("i");
+        location.reload();
+    } else {
+        console.log("取消退出登录。");
     }
 }

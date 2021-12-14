@@ -41,7 +41,7 @@ function DogTimeDif(dateDiff) {
         ResStr = `${minutes}分钟前 `
     }
     return ResStr;
-}clean = DOMPurify.sanitize( dirty );
+}
 
 function getDogDateTime(timedog) {
     postTime = new Date(timedog);
