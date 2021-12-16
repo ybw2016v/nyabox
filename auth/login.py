@@ -3,10 +3,10 @@ from data.models import Cdog,Udog
 from tools.gid import gen_dog_id
 import uuid
 from datetime import datetime
-
+import config
 import requests as r
 
-MKURL="https://m.dogcraft.top/api/i/"
+MKURL="{}/api/i/".format(config.MKURL)
 
 def create_user(args):
     """

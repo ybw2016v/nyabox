@@ -1,0 +1,8 @@
+alembic
+base36
+Flask
+flask-redis
+Flask-Executor
+Flask-RESTful
+requests
+SQLAlchemy
