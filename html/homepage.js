@@ -388,6 +388,16 @@ function PostAns() {
     }, function (data, status) {
         if (data.r == "OK") {
             // alert("提问成功，请耐心等待回答。");
+            if (confirm("是否分享到timeline")) {
+                const niddog=localStorage.getItem("doginfo");
+                const dognid=JSON.parse(niddog).nid;
+                const qcontent = document.getElementById(`QT${qid}`).innerText;
+                const sharetext=`回答了问题:\n[${qcontent}](${BOXURL}q/${qid})\n我的提问箱:\n${BOXURL}u/@${dognid}`;
+                const sharedog=encodeURIComponent(sharetext);
+                location.href=`https://m.dogcraft.top/share/?text=${sharedog}`;
+            } else {
+                
+            }
             const SHtml = `<div class="alert alert-success alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>回答成功!回答ID： ${data.id}</strong> 

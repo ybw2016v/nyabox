@@ -20,6 +20,7 @@
 - [x] ~~支持Markdown~~ 通过[marked](https://github.com/markedjs/marked)进行markdown转换
 - [x] ~~XSS防止~~ 通过[DOMPurify](https://github.com/cure53/DOMPurify)
 - [ ] 回答页面markdown预览功能
+- [ ] 添加一个回答后可以直接分享到DMI的功能
 
 ## 安装
 

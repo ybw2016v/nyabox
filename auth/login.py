@@ -6,7 +6,7 @@ from datetime import datetime
 import config
 import requests as r
 
-MKURL="{}/api/i/".format(config.MKURL)
+MKURL="{}/api/i/".format(config.MISSKEY_URL)
 
 def create_user(args):
     """
