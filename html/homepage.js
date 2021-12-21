@@ -259,6 +259,9 @@ function AddQl(data) {
                     <button type="button" class="btn btn-primary" qid="${item.id}" onclick="DelQues(this);">
                         删除
                     </button>
+                    <button type="button" class="btn btn-primary" qid="${item.id}" onclick="ShareQues(this);">
+                        分享
+                    </button>
                         </div>
                     </div>
                     
@@ -286,6 +289,7 @@ function AddQl(data) {
                     <button type="button" class="btn btn-primary" qid="${item.id}" onclick="DelQues(this);">
                         删除
                     </button>
+                    
                         </div>
                     </div>
                     <div class="card-footer">
@@ -391,8 +395,9 @@ function PostAns() {
             if (confirm("是否分享到timeline")) {
                 const niddog=localStorage.getItem("doginfo");
                 const dognid=JSON.parse(niddog).nid;
+                const burl=location.origin;
                 const qcontent = document.getElementById(`QT${qid}`).innerText;
-                const sharetext=`回答了问题:\n[${qcontent}](${BOXURL}q/${qid})\n我的提问箱:\n${BOXURL}u/@${dognid}`;
+                const sharetext=`回答了问题:\n[${qcontent}](${burl}q/${qid})\n我的提问箱:\n${burl}/u/@${dognid}`;
                 const sharedog=encodeURIComponent(sharetext);
                 location.href=`https://m.dogcraft.top/share/?text=${sharedog}`;
             } else {
@@ -459,7 +464,21 @@ function DelQues(eldog) {
             }
         });
     }
-    else { }
+    else {
+
+    }
+}
+
+function ShareQues(eldog) {
+    console.log("SHARE");
+    const niddog=localStorage.getItem("doginfo");
+    const dognid=JSON.parse(niddog).nid;
+    const qid = eldog.getAttribute("qid");
+    const burl=location.origin;
+    const qcontent = document.getElementById(`QT${qid}`).innerText;
+    const sharetext=`回答了问题:\n[${qcontent}](${burl}/q/${qid})\n我的提问箱:\n${burl}/u/@${dognid}`;
+    const sharedog=encodeURIComponent(sharetext);
+    location.href=`https://m.dogcraft.top/share/?text=${sharedog}`;
 }
 
 

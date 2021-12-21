@@ -1,2 +1,2 @@
 const APIURL='';
-const BOXURL='https://nya.neko.red/';
+const MISSKEY_URL='https://m.dogcraft.top/';
