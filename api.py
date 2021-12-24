@@ -24,6 +24,7 @@ from tools.listq import get_all_qa, get_my_q, get_user_qa
 from tools.user import get_dog_i,get_dog_id
 from tools.rmdq import rmqa_by_id_i
 from tools.chus import ch_u_s
+from admin.lsaq import aget_all_qa
 import config
 
 app = Flask(__name__)
@@ -168,6 +169,14 @@ class ChangeDog(Resource):
         args = parser.parse_args()
         return ch_u_s(args)
 
+class AdminListQA(Resource):
+    def post(self):
+        """
+        管理员列出所有的问题回答
+        """
+        args = parser.parse_args()
+        return aget_all_qa(args)
+
 
 @app.route("/")
 def hel():
@@ -227,6 +236,7 @@ api.add_resource(GetCById, '/api/getc/')
 api.add_resource(IDdog, '/api/getd/')
 api.add_resource(RmQuesById, '/api/rmqa/')
 api.add_resource(ChangeDog, '/api/chus/')
+api.add_resource(AdminListQA, '/api/admin/list/')
 # api.add_resource(logindog, '/api/login/')
 # api.add_resource(doginfos, '/api/user/')
 # api.add_resource(updog, '/api/update/')
