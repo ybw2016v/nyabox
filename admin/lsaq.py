@@ -8,7 +8,6 @@ def aget_all_qa(args):
     page= 0 if args['y'] is None else args['y']
     token=args["i"]
     udog = get_user_by_i(token)
-    print(udog)
     if udog=="ERROR" or udog is None:
         return {"r":403}
     if not udog.isAdmin:
@@ -27,5 +26,22 @@ def aget_all_qa(args):
         resdogs.append(qit)
     return {"r":"OK","res":resdogs,"num":qdogsn}
 
-
+def aget_all_ans(args):
+    """
+    管理员获取所有回答列表
+    """
+    page= 0 if args['y'] is None else args['y']
+    token=args["i"]
+    udog = get_user_by_i(token)
+    if udog=="ERROR" or udog is None:
+        return {"r":403}
+    if not udog.isAdmin:
+        return {"r":404}
+    qdogs=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="A").limit(10).offset(page*10)
+    qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="A").count()
+    resdogs=[]
+    for qitem in qdogs:
+        qit={"id":qitem.id,"qid":qitem.qid,"c":qitem.text,"hid":qitem.hid,"time":qitem.stime.astimezone().isoformat(timespec='milliseconds')}
+        resdogs.append(qit)
+    return {"r":"OK","res":resdogs,"num":qdogsn}
 
