@@ -25,6 +25,7 @@ from tools.user import get_dog_i,get_dog_id
 from tools.rmdq import rmqa_by_id_i
 from tools.chus import ch_u_s
 from admin.lsaq import aget_all_qa,aget_all_ans
+from admin.upaq import update_qa
 import config
 
 app = Flask(__name__)
@@ -47,6 +48,7 @@ parser.add_argument('y', type=int, help='分页页数')
 parser.add_argument('type', type=str, help='类型')
 parser.add_argument('isShow', type=bool, help='id',location=['form', 'json'])
 parser.add_argument('isAccept', type=bool, help='id',location=['form', 'json'])
+parser.add_argument('u', type=dict, help='更新内容',location=['form', 'json'])
 
 
 def doglimt(dogip):
@@ -183,6 +185,13 @@ class AdminListAns(Resource):
         """
         args = parser.parse_args()
         return aget_all_ans(args)
+class AdminUpdateQa(Resource):
+    def post(self):
+        """
+        管理员更新问题
+        """
+        args = parser.parse_args()
+        return update_qa(args)
 
 
 @app.route("/")
@@ -245,6 +254,7 @@ api.add_resource(RmQuesById, '/api/rmqa/')
 api.add_resource(ChangeDog, '/api/chus/')
 api.add_resource(AdminListQA, '/api/admin/list/')
 api.add_resource(AdminListAns, '/api/admin/lsan/')
+api.add_resource(AdminUpdateQa, '/api/admin/upqa/')
 # api.add_resource(logindog, '/api/login/')
 # api.add_resource(doginfos, '/api/user/')
 # api.add_resource(updog, '/api/update/')
