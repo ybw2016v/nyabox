@@ -26,6 +26,7 @@ from tools.rmdq import rmqa_by_id_i
 from tools.chus import ch_u_s
 from admin.lsaq import aget_all_qa,aget_all_ans
 from admin.upaq import update_qa
+from admin.rmqa import remove_qa
 import config
 
 app = Flask(__name__)
@@ -192,6 +193,13 @@ class AdminUpdateQa(Resource):
         """
         args = parser.parse_args()
         return update_qa(args)
+class AdminRemoveQa(Resource):
+    def post(self):
+        """
+        管理员删除问题
+        """
+        args = parser.parse_args()
+        return remove_qa(args)
 
 
 @app.route("/")
