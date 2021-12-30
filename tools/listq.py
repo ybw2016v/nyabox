@@ -56,7 +56,10 @@ def get_user_qa(args,isAll=False):
         if qdog.hid is not None:
             
             adog=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.id==qdog.hid).first()
-            qdoga={"id":adog.id,"time":adog.stime.astimezone().isoformat(timespec='milliseconds'),"c":adog.text}
+            if adog is None:
+                qdoga={"id":"9kiiad8k","time":"2020-12-28T10:12:05.636+08:00","c":"回答不见了"}
+            else:
+                qdoga={"id":adog.id,"time":adog.stime.astimezone().isoformat(timespec='milliseconds'),"c":adog.text}
         dictd={"id":qdog.id,"hid":qdog.hid,"c":qdog.text,"tid":qdog.tid,"time":qdog.stime.astimezone().isoformat(timespec='milliseconds'),"ans":qdoga}
         resdog.append(dictd)
     return {"r":"OK","res":resdog,"num":qdogsn}
@@ -90,7 +93,10 @@ def get_my_q(args):
         if (qdog.hid is not None) and (dogtype!="b"):
             
             adog=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.id==qdog.hid).first()
-            qdoga={"id":adog.id,"time":adog.stime.astimezone().isoformat(timespec='milliseconds'),"c":adog.text}
+            if adog is None:
+                qdoga={"id":"9kiiad8k","time":"2020-12-28T10:12:05.636+08:00","c":"回答不见了"}
+            else:
+                qdoga={"id":adog.id,"time":adog.stime.astimezone().isoformat(timespec='milliseconds'),"c":adog.text}
         dictd={"id":qdog.id,"hid":qdog.hid,"c":qdog.text,"tid":qdog.tid,"time":qdog.stime.astimezone().isoformat(timespec='milliseconds'),"ans":qdoga}
         resdog.append(dictd)
     return {"r":"OK","res":resdog,"num":qdogsn}
