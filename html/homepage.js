@@ -139,7 +139,7 @@ function AddHomeUserInfo(token) {
             
         }
         else {
-            alart("错误，该服务暂不可用");
+            alert("错误，该服务暂不可用");
             window.location.href = "/";
         }
     }),dataType="json"
