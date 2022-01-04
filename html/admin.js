@@ -59,7 +59,7 @@ function AddAdminInfo(token) {
 }
 
 function AddAdminQ1(N = 0) {
-    //未回答问题
+    //所有问答
     window.qltype = "ql1";
     const Dql1 = document.getElementById("ql1");
     Dql1.className = "nav-link active";
@@ -73,6 +73,26 @@ function AddAdminQ1(N = 0) {
             // console.log(data.c);
             window.homepage = N;
             AdminAddQ(data);
+        }
+    }
+    );
+}
+
+function AddAdminQ2(N = 0) {
+    //所有问答
+    window.qltype = "ql2";
+    const Dql1 = document.getElementById("ql1");
+    Dql2.className = "nav-link active";
+    const Dql2 = document.getElementById("ql2");
+    Dql1.className = "nav-link";
+    CommitJSON(APIURL + "/api/admin/lsan/", {
+        "i": window.token,
+        "y": N
+    }, function (data, status) {
+        if (data.r == "OK") {
+            // console.log(data.c);
+            window.homepage = N;
+            AdminAddA(data);
         }
     }
     );
@@ -97,19 +117,19 @@ function AdminAddQ(data) {
     else {
         for (i = 0; i < data.res.length; i++) {
             const item = data.res[i];
-            var AnsHtml="";
+            var AnsHtml = "";
             if (item.hid) {
                 for (let j = 0; j < item.ans.length; j++) {
                     const ansdogitem = item.ans[j];
-                    const adtmm=getDogDateTime(ansdogitem.time);
+                    const adtmm = getDogDateTime(ansdogitem.time);
                     AnsHtml += `<hr><div class="contain  ques" id="${ansdogitem.id}">
                     ${CMarkDown(ansdogitem.c)}
                 </div><div class="admindogtitm">${adtmm}</div>
                 `;
                 }
-                
+
             }
-            const Iadminhtml=`<div class="card">
+            const Iadminhtml = `<div class="card">
             <div class="card-body" id="${item.id}">
                 <h6>Q:</h6>
                 <div class="contain  ques" id="QT${item.id}">
@@ -135,11 +155,14 @@ function AdminAddQ(data) {
 
         }
     }
-    
+
     AFenYe(data.num);
 }
 
 
+function AdminAddA(data) {
+    // 明天再写
+}
 
 function AFenYe(num) {
     const MaxPage = Math.ceil(num / 10);
