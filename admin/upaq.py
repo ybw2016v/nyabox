@@ -16,10 +16,11 @@ def update_qa(args):
     qdog=Cdog.query.filter(Cdog.id==qid).first()
     if qdog is None:
         return {"r":404,"msg":"问题不存在"}
-    if "time" in updateinfo:
-        qdog.stime=datetime.strptime(updateinfo["time"],"%Y-%m-%dT%H:%M:%S.%fZ")
-    if "c" in updateinfo:
-        qdog.text=updateinfo["c"]
+    if updateinfo is not None:
+        if "time" in updateinfo:
+            qdog.stime=datetime.strptime(updateinfo["time"],"%Y-%m-%dT%H:%M:%S.%fZ")
+        if "c" in updateinfo:
+            qdog.text=updateinfo["c"]
     db_session.commit()
     return {"r":"OK","msg":"更新成功","res":updateinfo}
 

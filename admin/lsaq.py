@@ -41,7 +41,7 @@ def aget_all_ans(args):
     qdogsn=Cdog.query.order_by(Cdog.stime.desc()).filter(Cdog.type=="A").count()
     resdogs=[]
     for qitem in qdogs:
-        qit={"id":qitem.id,"qid":qitem.qid,"c":qitem.text,"hid":qitem.hid,"time":qitem.stime.astimezone().isoformat(timespec='milliseconds')}
+        qit={"id":qitem.id,"uid":qitem.uid,"qid":qitem.qid,"c":qitem.text,"hid":qitem.hid,"time":qitem.stime.astimezone().isoformat(timespec='milliseconds')}
         resdogs.append(qit)
     return {"r":"OK","res":resdogs,"num":qdogsn}
 

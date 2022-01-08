@@ -10,18 +10,12 @@ function AddAdminInfo(token) {
             }
             var AdminHomeHtml = `<div class="card">
             <div class="card-body" id="${data.c.uid}">
-                <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname"><a href="/u/${data.c.uid}">${data.c.name}</a></span>
+                <img id="avatar-${data.c.uid}" src="${data.c.avatar}" class="dogavatar"><span class="dogname"><a href="/u/${data.c.uid}">管理员: ${data.c.name}</a></span>
                 <span class="posttime badge badge-pill badge-info">${data.c.nid}@m.dogcraft.top</span>
 
                 <div class="contain cont ques" id="text-${data.c.uid}">
                 </div>
                 <hr>
-                <button type="button" class="btn btn-primary" id="Quitsdog" data-target="#Quit">
-                    退出登录
-                </button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Setting">
-                    设置
-                </button>
             </div>
             <div class="card-footer">
                 <span class="uquadog"> uid: 
@@ -49,6 +43,10 @@ function AddAdminInfo(token) {
             window.homepage = 0;
             window.qltype = "ql1";
             AddAdminQ1(0);
+            const Dql1 = document.getElementById("ql1");
+            Dql1.addEventListener("click", function () { AddAdminQ1(); });
+            const Dql2 = document.getElementById("ql2");
+            Dql2.addEventListener("click", function () { AddAdminQ2(); });
 
         } else {
             alert("错误，该服务暂不可用");
@@ -82,8 +80,8 @@ function AddAdminQ2(N = 0) {
     //所有问答
     window.qltype = "ql2";
     const Dql1 = document.getElementById("ql1");
-    Dql2.className = "nav-link active";
     const Dql2 = document.getElementById("ql2");
+    Dql2.className = "nav-link active";
     Dql1.className = "nav-link";
     CommitJSON(APIURL + "/api/admin/lsan/", {
         "i": window.token,
@@ -124,11 +122,20 @@ function AdminAddQ(data) {
                     const adtmm = getDogDateTime(ansdogitem.time);
                     AnsHtml += `<hr><div class="contain  ques" id="${ansdogitem.id}">
                     ${CMarkDown(ansdogitem.c)}
-                </div><div class="admindogtitm">${adtmm}</div>
+                </div>
+                <div><button type="button" class="btn btn-primary" qid="${ansdogitem.id}" onclick="ADelQues(this);">
+                删除
+            </button>
+            <button type="button" class="btn btn-primary" qid="${ansdogitem.id}" onclick="UpdateQA(this);">
+                修改
+            </button></div>
+                <div class="admindogtitm">${adtmm}</div>
+                
                 `;
                 }
 
             }
+            const qdtime=getDogDateTime(item.time);
             const Iadminhtml = `<div class="card">
             <div class="card-body" id="${item.id}">
                 <h6>Q:</h6>
@@ -136,14 +143,20 @@ function AdminAddQ(data) {
                     ${CQues(item.c)}
                 </div>
                 <hr>
+                <div class="contain  ques" id="A-${item.id}">
+            <button type="button" class="btn btn-primary" qid="${item.id}" onclick="ADelQues(this);">
+                删除
+            </button>
+            <button type="button" class="btn btn-primary" qid="${item.id}" onclick="UpdateQA(this);">
+                修改
+            </button>
+            
+                </div>
+                <hr>
                 <h6>A:</h6>
                 ${AnsHtml}
                 <hr>
-            <div class="contain  ques" id="A-${item.id}">
-            <button type="button" class="btn btn-primary" qid="${item.id}" onclick="DelQues(this);">
-                删除
-            </button>
-                </div>
+            
             </div>
             
             <div class="card-footer">
@@ -161,7 +174,53 @@ function AdminAddQ(data) {
 
 
 function AdminAddA(data) {
-    // 明天再写
+    $("#admindoglist").html("");
+    if ((data.res.length == 0) || (data.num == 0)) {
+        DogHomeListHtnl = `<div class="card">
+                <div class="card-body" id="notfound">
+                    <div class="contain ">
+                        <h2 class="text-center sdkldog">404 NotFound</h2>
+                        <h4 class="sdkldog">没有回答了</h4>
+                        <br>
+                        <div class="img text-center"><img  src="https://a.neko.red/ep/404.png" alt=""></div>
+                        
+                    </div>
+                </div>
+            </div>`;
+        $("#admindoglist").html(DogHomeListHtnl);
+    }
+    else {
+        for (const item of data.res) {
+            const adtmm = getDogDateTime(item.time);
+            AnsAllHtml=`<div class="card">
+            <div class="card-body" id="${item.id}">
+                <p>id:${item.id}</p>
+                <p>uid:<a href="/u/${item.uid}">${item.uid}</a></p>
+                <p>qid:<a href="/q/${item.qid}">${item.qid}</a></p>
+
+                <hr>
+                <h6>A:</h6>
+                ${CMarkDown(item.c)}
+                <hr>
+            <div class="contain  ques" id="A-${item.id}">
+            <button type="button" class="btn btn-primary" qid="${item.id}" onclick="ADelQues(this);">
+                删除
+            </button>
+            <button type="button" class="btn btn-primary" qid="${item.id}" onclick="UpdateQA(this);">
+                修改
+            </button>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="uquadog"> 回答时间:${adtmm}
+                    <br> 
+        </div>`;
+        $("#admindoglist").append(AnsAllHtml);
+        }
+
+    }
+    AFenYe(data.num);
 }
 
 function AFenYe(num) {
@@ -228,5 +287,42 @@ function AHou() {
         default:
             AddAdminQ1(window.homepage + 1);
             break;
+    }
+}
+
+
+function ADelQues(eldog) {
+    console.log("DEL");
+    // console.log(this);
+    const qid = eldog.getAttribute("qid");
+    const rmdogimnfo = `确定删除${qid}及其相关回答吗？\n\n请注意，删除后不可恢复。`;
+    if (confirm(rmdogimnfo)) {
+        token = localStorage.getItem("i");
+        CommitJSON(APIURL + "/api/admin/rmqa/", {
+            "i": token,
+            "t": qid
+        }, function (data, status) {
+            if (data.r == "OK") {
+                alert("删除成功.");
+                dogroute(location.href, false);
+
+                // window.location.href /= "./";
+            } else {
+                alert("删除失败，该服务暂不可用。");
+            }
+        });
+    }
+    else {
+
+    }
+}
+
+function showAdminPage() {
+    token = localStorage.getItem("i");
+    if (token) {
+        AddAdminInfo(token);
+    } else {
+        alert("请先登录");
+        window.location.href = "/static/auth.html";
     }
 }

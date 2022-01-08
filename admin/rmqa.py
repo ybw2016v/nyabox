@@ -14,6 +14,9 @@ def remove_qa(args):
     qdog=Cdog.query.filter(Cdog.id==qid).first()
     if qdog is None:
         return {"r":404,"msg":"问题不存在"}
+    qqdog=Cdog.query.filter(Cdog.hid==qid).first()
+    if qqdog is not None:
+        qqdog.hid=None
     db_session.delete(qdog)
     db_session.commit()
     return {"r":"OK","id":qid}

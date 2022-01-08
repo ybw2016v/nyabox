@@ -263,9 +263,8 @@ api.add_resource(ChangeDog, '/api/chus/')
 api.add_resource(AdminListQA, '/api/admin/list/')
 api.add_resource(AdminListAns, '/api/admin/lsan/')
 api.add_resource(AdminUpdateQa, '/api/admin/upqa/')
-# api.add_resource(logindog, '/api/login/')
-# api.add_resource(doginfos, '/api/user/')
-# api.add_resource(updog, '/api/update/')
+api.add_resource(AdminRemoveQa, '/api/admin/rmqa/')
+
 
 
 if __name__ == '__main__':
