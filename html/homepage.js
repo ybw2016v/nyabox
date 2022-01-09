@@ -397,7 +397,7 @@ function PostAns() {
                 const dognid=JSON.parse(niddog).nid;
                 const burl=location.origin;
                 const qcontent = document.getElementById(`QT${qid}`).innerText;
-                const sharetext=`回答了问题:\n[${qcontent}](${burl}q/${qid})\n我的提问箱:\n${burl}/u/@${dognid}`;
+                const sharetext=`回答了问题:\n[${qcontent}](${burl}/q/${qid})\n我的提问箱:\n${burl}/u/@${dognid}`;
                 const sharedog=encodeURIComponent(sharetext);
                 location.href=`${MISSKEY_URL}share/?text=${sharedog}`;
             } else {
