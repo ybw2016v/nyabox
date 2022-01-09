@@ -14,7 +14,7 @@
 - [x] ~~退出登录~~
 - [x] ~~简单的用户设置~~ 添加了一个可供用户不再接受提问的功能
 - [ ] 单页应用(单页和三页没有质的区别)
-- [ ] 管理页面
+- [x] ~~管理页面~~简单的管理页面完成，可以删除或者修改问答
 - [x] ~~邮件通知~~邮件通知功能不搞了，没意思，容易被滥用、封号，改成misskey内部的message通知
 - [x] ~~支持Markdown~~ 通过[marked](https://github.com/markedjs/marked)进行markdown转换
 - [x] ~~XSS防止~~ 通过[DOMPurify](https://github.com/cure53/DOMPurify)
