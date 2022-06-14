@@ -45,7 +45,7 @@ function PostQuse(dogs) {
 
 
 function MoreUserAns(odog) {
-    if (window.UserAnsNum) {
+    if (!window.UserAnsNum) {
         window.UserAnsNum=0;
     }
     window.UserAnsNum += 1;
