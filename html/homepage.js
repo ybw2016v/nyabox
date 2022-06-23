@@ -494,6 +494,7 @@ function showHomePage() {
 function QuitLogin() {
     if (confirm("确定要退出登录吗？")) {
         localStorage.removeItem("i");
+        localStorage.removeItem("doginfo");
         location.reload();
     } else {
         console.log("取消退出登录。");
